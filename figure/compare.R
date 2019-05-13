@@ -28,6 +28,8 @@ for (i in 1:4) {
 			data=data[i],
 			fit=fit[i],
 			estimate=x[[1]],
+			growth=(exp(coef(x[[3]])[[1]])-1) * exp(coef(x[[3]])[[2]]),
+			period=1/exp(coef(x[[3]])[[2]]),
 			coverage=(x[[2]][1] < 2 && 2 < x[[2]][2])
 		)
 	}) %>%
@@ -46,22 +48,40 @@ g1 <- ggplot(summdata) +
 		legend.position="none"
 	)
 
+g2 <- ggplot(summdata) +
+	geom_boxplot(aes(x=data, y=growth, fill=fit), width=0.5) +
+	geom_hline(yintercept=1, lty=2) +
+	scale_x_discrete("Simulations") +
+	scale_y_continuous(expression(Growth~rate~(generation^-1))) +
+	theme(
+		legend.position="none"
+	)
+
+g3 <- ggplot(summdata) +
+	geom_boxplot(aes(x=data, y=period, fill=fit), width=0.5) +
+	geom_hline(yintercept=1, lty=2) +
+	scale_x_discrete("Simulations") +
+	scale_y_continuous("Generation time") +
+	theme(
+		legend.position="none"
+	)
+
 coverdata <- summdata %>%
 	group_by(data, fit) %>%
 	summarize(
 		coverage=mean(coverage)
 	)
 
-g2 <- ggplot(coverdata) +
+g4 <- ggplot(coverdata) +
 	geom_hline(yintercept=0.95, lty=2) +
 	geom_point(aes(x=data, y=coverage, col=fit, group=fit), size=5, position = position_dodge(width = 0.5)) +
 	scale_x_discrete("Simulations") +
-	scale_y_continuous("Coverage", limits=c(0, 1)) +
+	scale_y_continuous("Coverage (R0)", limits=c(0, 1)) +
 	scale_colour_discrete("Fitted") +
 	theme(
 		legend.position=c(0.76, 0.2)
 	)
 
-gtot <- arrangeGrob(g1, g2, nrow=1)
+gtot <- arrangeGrob(g1, g2, g3, g4, nrow=2)
 
-ggsave("compare.pdf", gtot, width=6, height=3)
+ggsave("compare.pdf", gtot, width=6, height=6)
