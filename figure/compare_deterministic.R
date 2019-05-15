@@ -52,7 +52,7 @@ g2 <- ggplot(summdata) +
 	geom_boxplot(aes(x=data, y=growth, fill=fit), width=0.5) +
 	geom_hline(yintercept=1, lty=2) +
 	scale_x_discrete("Simulations") +
-	scale_y_continuous(expression(Growth~rate~(generation^-1))) +
+	scale_y_continuous(expression(Growth~rate)) +
 	theme(
 		legend.position="none"
 	)
@@ -84,4 +84,4 @@ g4 <- ggplot(coverdata) +
 
 gtot <- arrangeGrob(g1, g2, g3, g4, nrow=2)
 
-ggsave("compare.pdf", gtot, width=6, height=6)
+ggsave("compare_deterministic.pdf", gtot, width=6, height=6)
