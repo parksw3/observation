@@ -1,4 +1,4 @@
-run_sir <- function(param=c(R0=2, gamma=1, N=1e5),
+run_sir <- function(param=c(R0=2, gamma=1, N=1e5, rho=0.5),
 					yini=c(S=1e5-10, I=10, R=0),
 					tmax=20,
 					tlength=0.1) {
@@ -10,8 +10,8 @@ run_sir <- function(param=c(R0=2, gamma=1, N=1e5),
 	
 	data.frame(
 		time=tail(tvec, -1),
-		incidence=-diff(dd[,"S"]),
-		prevalence=tail(dd[,"I"],-1),
-		mortality=diff(dd[,"R"])
+		incidence=-diff(dd[,"S"]) * param[["rho"]],
+		prevalence=tail(dd[,"I"],-1) * param[["rho"]],
+		mortality=diff(dd[,"R"]) * param[["rho"]]
 	)
 }

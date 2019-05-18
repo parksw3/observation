@@ -13,9 +13,9 @@ pomp_arg <- append(pomp_arg, list(data=fakedata, globals=globals,
 
 pomp_model <- do.call(pomp, pomp_arg)
 
-start <- c(R0=2, gamma=1, i0=0.0001, theta=10)
+start <- c(R0=2, gamma=1, i0=0.0001, theta=10, rho=0.5)
 
-rwsd_arg <- list(R0=0.01, gamma=0.01, i0=0.01, theta=0.01)
+rwsd_arg <- list(R0=0.01, gamma=0.01, i0=0.01, theta=0.01, rho=0.01)
 
 set.seed(101)
 mlist <- replicate(10, mif2(
@@ -25,7 +25,8 @@ mlist <- replicate(10, mif2(
 	Np=1000,
 	cooling.fraction.50=0.95,
 	rw.sd=do.call(rw.sd, rwsd_arg),
-	transform=TRUE) %>%
+	transform=TRUE,
+	tol=1e-301) %>%
 	continue(Nmif=50, cooling.fraction=0.8) %>%
 	continue(Nmif=50, cooling.fraction=0.6) %>%
 	continue(Nmif=50, cooling.fraction=0.2) %>%
@@ -37,7 +38,7 @@ which_mle <- mlist %>%
 
 mle <- mlist[[which_mle]]
 
-R0vec <- seq(1.5, 5, by=0.2)
+R0vec <- seq(1.1, 8, by=0.1)
 sumlist <- reslist <- vector('list', length(R0vec))
 
 rwsd_arg2 <- rwsd_arg
@@ -56,7 +57,8 @@ for (i in 1:length(R0vec)) {
 		Np=1000,
 		cooling.fraction.50=0.95,
 		rw.sd=do.call(rw.sd, rwsd_arg2),
-		transform=TRUE) %>%
+		transform=TRUE,
+		tol=1e-301) %>%
 		continue(Nmif=50, cooling.fraction=0.8) %>%
 		continue(Nmif=50, cooling.fraction=0.6) %>%
 		continue(Nmif=50, cooling.fraction=0.2) %>%

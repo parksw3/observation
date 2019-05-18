@@ -16,9 +16,9 @@ pomp_arg <- append(pomp_arg, list(data=data, globals=globals,
 
 pomp_model <- do.call(pomp, pomp_arg)
 
-start <- c(R0=2, gamma=1, i0=0.0001, theta=10)
+start <- c(R0=2, gamma=1, i0=0.0001, theta=10, rho=0.5)
 
-set.seed(102)
+set.seed(101)
 ss <- simulate(pomp_model, param=start, as.data.frame=TRUE)
 
 fakedata <- data.frame(

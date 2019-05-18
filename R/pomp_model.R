@@ -25,11 +25,11 @@ pomp_sir <- function(type=c("incidence", "mortality"),
 	")
 	
 	if (type == "incidence") {
-		dmeas <- pomp::Csnippet("lik = dnbinom_mu(cases, theta, C, give_log);")
-		rmeas <- pomp::Csnippet("cases = rnbinom_mu(theta, C);")
+		dmeas <- pomp::Csnippet("lik = dnbinom_mu(cases, theta, C*rho, give_log);")
+		rmeas <- pomp::Csnippet("cases = rnbinom_mu(theta, C*rho);")
 	} else {
-		dmeas <- pomp::Csnippet("lik = dnbinom_mu(cases, theta, M, give_log);")
-		rmeas <- pomp::Csnippet("cases = rnbinom_mu(theta, M);")
+		dmeas <- pomp::Csnippet("lik = dnbinom_mu(cases, theta, M*rho, give_log);")
+		rmeas <- pomp::Csnippet("cases = rnbinom_mu(theta, M*rho);")
 	}
 	
 	list(
@@ -42,15 +42,17 @@ pomp_sir <- function(type=c("incidence", "mortality"),
 			Tgamma=log(gamma);
 			Ti0=logit(i0);
 			Ttheta=log(theta);
+			Trho=logit(rho);
 		"),
 		fromEstimationScale=pomp::Csnippet("
 			TR0=exp(R0);
 			Tgamma=exp(gamma);
 			Ti0=expit(i0);
 			Ttheta=exp(theta);
+			Trho=expit(rho);
 		"),
 		statenames=c("S", "I", "C", "M"),
-		paramnames=c("R0", "gamma", "i0", "theta"),
+		paramnames=c("R0", "gamma", "i0", "theta", "rho"),
 		zeronames=c("C", "M")
 	)
 }
