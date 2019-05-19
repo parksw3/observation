@@ -3,7 +3,7 @@ library(pomp)
 source("../R/pomp_model.R")
 
 data <- data.frame(
-	time=seq(0, 10, by=0.1),
+	time=seq(0, 20, by=0.1),
 	cases=0
 )
 

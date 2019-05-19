@@ -28,29 +28,27 @@ summdata <- allsum %>%
 	bind_rows(.id="type") %>%
 	mutate(
 		type=factor(type, levels=c("incidence", "mortality"), labels=c("infection", "recovery"))
+	) %>%
+	filter(
+		R0 < 2.5
 	)
 
-set.seed(101)
-horizontal <- allmle %>%
-	lapply(function(x) {
-		ll <- logmeanexp(replicate(10, logLik(pfilter(x, Np=1000))))
-		data.frame(
-			logLik = ll - qchisq(0.95, 1)/2
-		)
-	}) %>%
-	bind_rows(.id="type") %>%
-	mutate(
-		type=factor(type, levels=c("incidence", "mortality"), labels=c("infection", "recovery"))
-	)
+horizontal <- data.frame(
+	hh=c(max(predict(loess(logLik~R0, data=filter(summdata, type=="infection")))), 
+		 max(predict(loess(logLik~R0, data=filter(summdata, type=="recovery")))))-qchisq(0.95, 1)/2,
+	type=c("infection", "recovery")
+)
+
+
 
 g1 <- ggplot(summdata) +
-	geom_hline(data=horizontal, aes(yintercept=logLik), lty=2) +
-	geom_vline(data=data.frame(type="infection"), aes(xintercept=1.72), lty=2) +
-	geom_vline(data=data.frame(type="infection"), aes(xintercept=4.81), lty=2) +
-	geom_vline(data=data.frame(type="recovery"), aes(xintercept=1.81), lty=2) +
-	geom_vline(data=data.frame(type="recovery"), aes(xintercept=3.75), lty=2) +
 	geom_smooth(aes(R0, logLik), lty=1, se=FALSE, method="loess", span=0.5, col="black", lwd=0.5) +
 	geom_point(aes(R0, logLik), shape=1, size=2) +
+	geom_hline(data=horizontal, aes(yintercept=hh), lty=2) +
+	geom_vline(data=data.frame(type="infection"), aes(xintercept=1.34), lty=2) +
+	geom_vline(data=data.frame(type="infection"), aes(xintercept=2.20), lty=2) +
+	geom_vline(data=data.frame(type="recovery"), aes(xintercept=1.64), lty=2) +
+	geom_vline(data=data.frame(type="recovery"), aes(xintercept=2.25), lty=2) +
 	scale_x_continuous("Basic reproductive number") +
 	scale_y_continuous("Profile log-likelihood") +
 	facet_wrap(~type, ncol=1, scale="free_y") +

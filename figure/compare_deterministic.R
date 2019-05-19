@@ -30,6 +30,7 @@ for (i in 1:4) {
 			estimate=x[[1]],
 			growth=(exp(coef(x[[3]])[[1]])-1) * exp(coef(x[[3]])[[2]]),
 			period=1/exp(coef(x[[3]])[[2]]),
+			rho=plogis(coef(x[[3]])[[5]]),
 			coverage=(x[[2]][1] < 2 && 2 < x[[2]][2])
 		)
 	}) %>%
@@ -58,10 +59,10 @@ g2 <- ggplot(summdata) +
 	)
 
 g3 <- ggplot(summdata) +
-	geom_boxplot(aes(x=data, y=period, fill=fit), width=0.5) +
-	geom_hline(yintercept=1, lty=2) +
+	geom_boxplot(aes(x=data, y=rho, fill=fit), width=0.5) +
+	geom_hline(yintercept=0.5, lty=2) +
 	scale_x_discrete("Simulations") +
-	scale_y_continuous("Generation time") +
+	scale_y_continuous("Reporting rate") +
 	theme(
 		legend.position="none"
 	)
@@ -73,6 +74,7 @@ coverdata <- summdata %>%
 	)
 
 g4 <- ggplot(coverdata) +
+	geom_rect(xmin=-Inf, xmax=Inf, ymin=binom.test(95, 100)[[4]][1], ymax=binom.test(95, 100)[[4]][2], alpha=0.1) +
 	geom_hline(yintercept=0.95, lty=2) +
 	geom_point(aes(x=data, y=coverage, col=fit, group=fit), size=5, position = position_dodge(width = 0.5)) +
 	scale_x_discrete("Simulations") +

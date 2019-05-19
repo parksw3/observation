@@ -48,9 +48,26 @@ fit_sir <- function(data,
 		control=list(maxit=5000)
 	)
 	
+	cc <- bbmle::confint(bb, 1)
+	
+	while (class(cc)=="mle2") {
+		new_start <- coef(cc)
+		names(new_start) <- names(start)
+		
+		bb <- bbmle::mle2(
+			nll_sir,
+			new_start,
+			"Nelder-Mead",
+			data=list(data=data, tlength=tlength, type=type, N=N),
+			control=list(maxit=5000)
+		)		
+		
+		cc <- bbmle::confint(bb, 1)
+	}
+	
 	list(
 		R0=exp(bbmle::coef(bb)[[1]]),
-		R0.confint=exp(bbmle::confint(bb, 1)),
+		R0.confint=exp(cc),
 		fit=bb
 	)
 }

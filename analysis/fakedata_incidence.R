@@ -38,7 +38,7 @@ which_mle <- mlist %>%
 
 mle <- mlist[[which_mle]]
 
-R0vec <- seq(1.1, 8, by=0.1)
+R0vec <- seq(1.1, 5, by=0.1)
 sumlist <- reslist <- vector('list', length(R0vec))
 
 rwsd_arg2 <- rwsd_arg
@@ -74,7 +74,6 @@ for (i in 1:length(R0vec)) {
 }
 
 ## prediction from mle
-predres <- simulate(mle, nsim=1000, as.data.frame=TRUE,
-		 times=seq(0, 15, by=0.1))
+predres <- simulate(mle, nsim=1000, as.data.frame=TRUE)
 
 save("mle", "reslist", "sumlist", "predres", file="fakedata_incidence.rda")
