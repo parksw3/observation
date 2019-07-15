@@ -1,0 +1,109 @@
+\documentclass{article}\usepackage[]{graphicx}\usepackage[]{color}
+
+\title{Notes on observational processes in epidemic models}
+\author{Sang Woo Park and Benjamin M Bolker}
+
+\usepackage{tabularx}
+
+\usepackage{amsmath}
+\usepackage{natbib}
+\usepackage{hyperref}
+\bibliographystyle{chicago}
+\date{\today}
+
+\usepackage{bm}
+
+\usepackage{afterpage}
+\usepackage{pdflscape}
+
+\newcommand{\etal}{\textit{et al.}}
+
+\newcommand{\comment}[3]{\textcolor{#1}{\textbf{[#2: }\textit{#3}\textbf{]}}}
+\newcommand{\bmb}[1]{\comment{cyan}{BMB}{#1}}
+\newcommand{\swp}[1]{\comment{magenta}{SWP}{#1}}
+\newcommand{\citetapos}[1]{\citeauthor{#1}'s \citeyearpar{#1}}
+
+\newcommand{\fref}[1]{Fig.~\ref{fig:#1}}
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+
+Mechanistic analyses of an epidemic time series allow us to infer the underlying 
+transmission mechanism, estimate biologically relevant parameters, and 
+predict the course of an epidemic. In order to make a precise and accurate inference, 
+disease modelers often focus on developing more realistic process models. For example,
+England and Wales measles time series from the prevaccination era have been analyzed
+using many different models -- these model account for time-varying transmission
+rates \citep{fine1982measles}, realistic age structure \citep{schenzle1984age},
+metapopulation structure \citep{xia2004measles}, continuous-time infection process 
+\citep{cauchemez2008likelihood}, and extra-demographic variability \citep{he2009plug}. 
+
+Despite the amount of effort put into developing better process models, disease 
+modelers often neglect details of the observation process associated with disease
+case reports. Most disease models assume that new cases are reported
+instantaneously when an individual is infected or shows symptom; one exception is
+the model by \citep{he2009plug}, which assumes that infections are counted upon
+recovery (because diagnosed cases are put to bed rest and are effectively 
+no longer infectious).
+
+Here, we use a simple SIR model to study how observation process affects statistical
+inference of underlying parameters. We show that making wrong assumptions about
+the observation process can lead to biases in parameter estimates and narrow 
+confidence intervals.
+
+\section{Methods}
+
+The Susceptible-Infected-Removed (SIR) model describes how disease spreads in a
+homogeneous population:
+\begin{equation}
+\begin{aligned}
+\frac{dS}{dt} &= - \beta S \frac{I}{N}\\
+\frac{dI}{dt} &= \beta S \frac{I}{N} - \gamma I\\
+\frac{dR}{dt} &= \gamma I,
+\end{aligned}
+\end{equation}
+where $\beta$ is the contact rate, $\gamma$ is the recovery rate, and $N = S + I + R$ is
+the total population size. Incidence measured upon infection ($i_1(t)$) can be
+defined by the integral:
+\begin{equation}
+i_1(t) = \int_{t}^{t + \Delta t} \beta S \frac{I}{N} dt,
+\end{equation}
+where $\Delta t$ is the reporting time step.
+Alternatively, we can keep track of cumulative incidence, $C$, by adding a 
+new state variable $dC/dt = \beta S I/N$ and take the difference between 
+two consecutive reporting periods: $i_1(t) = C(t+\delta t) - C(t)$. Likewise, 
+incidence measured upon recovery ($i_2(t)$) can be defined by the integral:
+\begin{equation}
+i_2(t) = \int_{t}^{t + \Delta t} \gamma I dt,
+\end{equation}
+or by the difference in cumulative number of recovered cases: $i_2(t) = R(t + \Delta t) - R(t)$.
+Finally, we assume that the reported incidence follows a negative binomial 
+distribution with mean $\rho i_1(t)$ or $\rho i_2(t)$, where $\rho$ is the 
+reporting rate, and a dispersion parameter $\theta$.
+
+\section{Results}
+
+In order to introduce the problem, we first compare the dynamics of $i_1(t)$ and
+$i_2(t)$ (Figure ?). Lags in reporting time delay the ``observed'' epidemic peak 
+timing and reduce the size of the peak. However, these differences in the reporting
+time have small effect to the overall shape of the epidemic curve. In the presence
+of observation and process error, we may not expect to be able to distinguish between
+the two reporting processes. Note that incidence measured at these two periods are 
+different from prevalence, which is represented by the state variable $I(t)$; the
+observed dynamics of incidence depend on the reporting time step, whereas those of
+prevalence do not (hence we expect incidence and prevalence to be similar only when
+the reporting time step is equal to the disease generation time). While it is
+uncommon, some models do not make a clear distinction between the two.
+
+Although incidence measured at two different periods are qualitatively very similar,
+
+
+
+
+
+
+
+\bibliography{observation}
+\end{document}
