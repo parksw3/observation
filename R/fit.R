@@ -36,6 +36,7 @@ fit_sir <- function(data,
 					start=c(log.R0=log(2), log.gamma=log(1), logit.I0=qlogis(1e-4), log.size=log(10),
 							logit.rho=qlogis(0.5)),
 					N=1e5,
+					fixed=NULL,
 					type=c("incidence", "mortality"),
 					tlength=0.1) {
 	type <- match.arg(type)
@@ -44,11 +45,12 @@ fit_sir <- function(data,
 		nll_sir,
 		start,
 		"Nelder-Mead",
+		fixed=fixed,
 		data=list(data=data, tlength=tlength, type=type, N=N),
 		control=list(maxit=5000)
 	)
 	
-	cc <- bbmle::confint(bb, 1)
+	cc <- confint(bb, 1)
 	
 	while (class(cc)=="mle2") {
 		new_start <- coef(cc)
@@ -58,11 +60,12 @@ fit_sir <- function(data,
 			nll_sir,
 			new_start,
 			"Nelder-Mead",
+			fixed=fixed,
 			data=list(data=data, tlength=tlength, type=type, N=N),
 			control=list(maxit=5000)
 		)		
 		
-		cc <- bbmle::confint(bb, 1)
+		cc <- confint(bb, 1)
 	}
 	
 	list(

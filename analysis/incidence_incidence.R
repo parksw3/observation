@@ -12,6 +12,8 @@ for (i in 1:length(incidence_data)) {
 	print(i)
 	data <- incidence_data[[i]]
 	
+	fixed <- NULL
+	
 	ff <- fit_sir(data)
 	
 	reslist[[i]] <- ff

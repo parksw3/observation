@@ -30,20 +30,22 @@
 
 \section{Introduction}
 
-Mechanistic analyses of an epidemic time series allow us to infer the underlying 
+Mechanistic analyses of epidemic time series allow us to infer the underlying 
 transmission mechanism, estimate biologically relevant parameters, and 
-predict the course of an epidemic. In order to make a precise and accurate inference, 
-disease modelers often focus on developing more realistic process models. For example,
-England and Wales measles time series from the prevaccination era have been analyzed
-using many different models -- these model account for time-varying transmission
-rates \citep{fine1982measles}, realistic age structure \citep{schenzle1984age},
+predict the course of an epidemic \citep{breto2009time}. In order to make a 
+precise and accurate inference, disease modelers often focus on developing
+more realistic process models. For example, the same London measles time 
+series from the prevaccination era has been analyzed using multiple models -- 
+these models account for time-varying transmission rates \citep{fine1982measles}, 
+realistic age structure \citep{schenzle1984age},
 metapopulation structure \citep{xia2004measles}, continuous-time infection process 
 \citep{cauchemez2008likelihood}, and extra-demographic variability \citep{he2009plug}. 
 
-Despite the amount of effort put into developing better process models, disease 
+Despite the amount of effort put into developing \emph{better} process models, disease 
 modelers often neglect details of the observation process associated with disease
 case reports. Most disease models assume that new cases are reported
-instantaneously when an individual is infected or shows symptom; one exception is
+instantaneously when an individual is infected (e.g., \cite{martinez2016differential, 
+kennedy2018modeling, pons2018serotype}) or develops symptom; one exception is
 the model by \citep{he2009plug}, which assumes that infections are counted upon
 recovery (because diagnosed cases are put to bed rest and are effectively 
 no longer infectious).
@@ -81,7 +83,14 @@ i_2(t) = \int_{t}^{t + \Delta t} \gamma I dt,
 or by the difference in cumulative number of recovered cases: $i_2(t) = R(t + \Delta t) - R(t)$.
 Finally, we assume that the reported incidence follows a negative binomial 
 distribution with mean $\rho i_1(t)$ or $\rho i_2(t)$, where $\rho$ is the 
-reporting rate, and a dispersion parameter $\theta$.
+reporting rate, and an over dispersion parameter $\theta$.
+
+In this study, we focus on estimating 5 parameters: the basic reproductive
+number $\mathcal R_0 = \beta/\gamma$, mean infectious period $1/\gamma$, 
+reporting rate $\rho$, an over dispersion parameter $\theta$ and the initial
+proportion of the infected individuals $i_0$. Initial proportion of
+susceptible individuals is assumed to be $1 - i_0$. The total population
+size $N$ is assumed to be known.
 
 \section{Results}
 
@@ -97,7 +106,18 @@ prevalence do not (hence we expect incidence and prevalence to be similar only w
 the reporting time step is equal to the disease generation time). While it is
 uncommon, some models do not make a clear distinction between the two.
 
-Although incidence measured at two different periods are qualitatively very similar,
+Although the observed epidemic curves look very similar regardless of when incidence
+is reported, fitting $i_1(t)$ and $i_2(t)$ to the same time series yields different
+estimates (Figure ?). 
+
+To better understand how assumptions about timing of case reporting affect parameter
+estimates of the SIR model, we simulate epidemic curves, measured upon both infection and
+recovery, 100 times and fit both models to each time series (Figure ?).
+
+
+
+
+
 
 
 

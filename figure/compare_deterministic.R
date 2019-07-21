@@ -50,19 +50,10 @@ g1 <- ggplot(summdata) +
 	)
 
 g2 <- ggplot(summdata) +
-	geom_boxplot(aes(x=data, y=growth, fill=fit), width=0.5) +
+	geom_boxplot(aes(x=data, y=period, fill=fit), width=0.5) +
 	geom_hline(yintercept=1, lty=2) +
 	scale_x_discrete("Simulations") +
-	scale_y_continuous(expression(Growth~rate)) +
-	theme(
-		legend.position="none"
-	)
-
-g3 <- ggplot(summdata) +
-	geom_boxplot(aes(x=data, y=rho, fill=fit), width=0.5) +
-	geom_hline(yintercept=0.5, lty=2) +
-	scale_x_discrete("Simulations") +
-	scale_y_continuous("Reporting rate") +
+	scale_y_continuous("Mean infectious period") +
 	theme(
 		legend.position="none"
 	)
@@ -73,7 +64,7 @@ coverdata <- summdata %>%
 		coverage=mean(coverage)
 	)
 
-g4 <- ggplot(coverdata) +
+g3 <- ggplot(coverdata) +
 	geom_rect(xmin=-Inf, xmax=Inf, ymin=binom.test(95, 100)[[4]][1], ymax=binom.test(95, 100)[[4]][2], alpha=0.1) +
 	geom_hline(yintercept=0.95, lty=2) +
 	geom_point(aes(x=data, y=coverage, col=fit, group=fit), size=5, position = position_dodge(width = 0.5)) +
@@ -84,6 +75,6 @@ g4 <- ggplot(coverdata) +
 		legend.position=c(0.76, 0.2)
 	)
 
-gtot <- arrangeGrob(g1, g2, g3, g4, nrow=2)
+gtot <- arrangeGrob(g1, g2, g3, nrow=1)
 
-ggsave("compare_deterministic.pdf", gtot, width=6, height=6)
+ggsave("compare_deterministic.pdf", gtot, width=8, height=3)

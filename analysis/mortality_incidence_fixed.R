@@ -12,11 +12,11 @@ for (i in 1:length(mortality_data)) {
 	print(i)
 	data <- mortality_data[[i]]
 	
-	fixed <- NULL
+	fixed <- c(log.gamma=0)
 	
-	ff <- fit_sir(data, type="mortality")
+	ff <- fit_sir(data, fixed=fixed)
 	
 	reslist[[i]] <- ff
 }
 
-save("reslist", file="mortality_mortality.rda")
+save("reslist", file="mortality_incidence_fixed.rda")
