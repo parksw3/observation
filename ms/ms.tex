@@ -1,4 +1,5 @@
 \documentclass{article}\usepackage[]{graphicx}\usepackage[]{color}
+\usepackage[top=1in,left=1in, right = 1in, footskip=1in]{geometry}
 
 \title{A note on observation processes in epidemic models}
 \author{Sang Woo Park and Benjamin M. Bolker}
@@ -120,23 +121,16 @@ size $N$ is assumed to be known.
 
 \section{Results}
 
-First, we compare the dynamics of incidence curves, $i_1(t)$ and $i_2(t)$, 
+First, we compare the deterministic dynamics of incidence curves, 
+$i_1(t)$ and $i_2(t)$, 
 (Figure 1). A lag in reporting time delays
-the observed epidemic peak timing and reduce the size of the peak. However, 
+the observed epidemic peak timing and reduces the size of the peak. However, 
 these differences in the reporting time have small effect to the overall shape 
 of the epidemic curve. In the presence of observation and process error, we 
-would not expect to be able to distinguish between the two reporting processes. 
+might not expect to be able to distinguish between the two reporting processes
+based on the time series alone. 
 
-Note that incidence is different from prevalence,
-$I(t)$, which is defined as the number of \emph{currently} infected individuals;
-the dynamics of observed incidence depend on the reporting time step (because the sum of 
-true incidence is equal to the final size of an epidemic), whereas those of
-prevalence do not. We expect the dynamics of incidence and prevalence to be similar only when
-the reporting time step is equal to the disease generation time. While it is
-uncommon, some models do not make a clear distinction between the two (e.g., 
-\cite{hooker2010parameterizing}).
-
-\begin{figure}
+\begin{figure}[!t]
 \includegraphics[width=\textwidth]{../figure/example.pdf}
 \caption{
 \textbf{A comparison of incidence measured at two different time points in infection.}
@@ -145,6 +139,15 @@ $\mathcal R_0 = 2$, $1/\gamma = 1$ time units, $N = 1 \times 10^5$, $i0 = 1 \tim
 and $\Delta t = 0.1$ time units.
 }
 \end{figure}
+
+Note that incidence is different from prevalence,
+$I(t)$, which is defined as the number of \emph{currently} infected individuals;
+the observed dynamics of incidence depend on the reporting time step (because the sum of 
+true incidence is equal to the final size of an epidemic), whereas those of
+prevalence do not. We expect the dynamics of incidence and prevalence to be similar only when
+the reporting time step is equal to the disease generation time. While it is
+uncommon, some models do not make a clear distinction between the two (e.g., 
+\cite{hooker2010parameterizing}).
 
 In order to understand how assumptions about the timing of case reporting affect 
 parameter estimates of the SIR model, we simulate observed epidemic curves 
@@ -189,17 +192,20 @@ model to recovery model overestimates the reproduction number instead).
 
 Differences in the direction of the bias can be explained by the estimates of the
 exponential growth rate ($r = \beta - \gamma$) and the mean infectious period ($1/\gamma$).
+In general, we expect delays in observation processes to make the observed epidemic 
+time series last longer and have smaller peaks (Figure 1).
 When we fit the recovery model to an infection time series, the model overestimates
-the initial growth rate in order to match the higher epidemic peak of the 
+the initial growth rate in order to match the bigger (and faster) epidemic peak of the 
 infection time series. When the mean infectious period is fixed, higher growth rate
 translates to higher basic reproduction number as we see in Figure 2B. When we allow
-the mean infectious period to vary, the model also underestimates the mean infectious
-period (high $\gamma$), which decreases the overall estimate of the basic reproduction number.
-Likewise, fitting the infection model to a recovery time series overestimates the
-mean infectious period (low $\gamma$), increasing the estimate of the basic reproduction number;
-when the mean infectious period is fixed, low growth rate estimates (to match the
-lower epidemic peak of the recovery time series) decrease the overall estimate of the
-basic reproduction number.
+the mean infectious period to vary, the model still over estimates the growth rate but
+also underestimates the mean infectious period (high $\gamma$), 
+which decreases the overall estimate of the basic reproduction number.
+Likewise, fitting the infection model to a recovery time series underestimates
+the growth rate to match the smaller (and slower) epidemic peak; this 
+underestimates the basic reproduction number when the mean infectious period is fixed. 
+When we allow the mean infectious period to vary, we overestimate the mean infectious
+period, which in turn increaseses the estimate of the basic reproduction number.
 
 \section{Discussion}
 
