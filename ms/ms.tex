@@ -239,10 +239,11 @@ making wrong assumptions about observational processes in epidemic models
 can give biased estimates of the basic reproduction number and narrow
 confidence intervals.
 
-We assumed that newly infected cases are reported instantaneously when
-individuals become infected or when they recover. Although neither of these
-assumptions is realistic, they are broadly consistent with the assumptions
-of other state-of-art epidemic models (see Introduction). 
+We compared two scenarios in which newly infected cases are reported 
+instantaneously (1) when individuals become infected or
+(2) when they recover. Although neither of these
+assumptions is realistic, many epidemic models still rely on these
+assumptions (see Introduction). 
 More realistic models may distinguish reported and unreported
 (i.e., identified and unidentified) cases by adding
 new state variables \citep{browne2015modeling,webb2015model} 
@@ -250,19 +251,29 @@ or by modeling an explicit delay kernel in reporting time
 \citep{harris1990reporting, ferguson2001foot, ster2009epidemiological, 
 birrell2011bayesian, funk2018real}.
 
-While we only considered observation processes associated with incidence 
-reporting in this study, it is equally as important to consider observation
-processes in mortality reporting. In particular, many disease modelers have
+We considered observation processes associated with incidence 
+reporting; however, we expect observation processes to be just as important
+in mortality reporting. In particular, many disease modelers have
 tried to infer underlying transmission mechanisms from historical mortality 
 data but assumed that individual deaths are recorded as soon as individuals die 
 \citep{he2013inferring, didelot2017model, dean2018human}; this includes
 \cite{kermack1927contribution} who approximated the reported \emph{number} of
 deaths per week from plague with instantaneous death \emph{rates} ($dR/dt$).
-This assumption does not account for the possibility 
+These frameworks do not account for the possibility 
 that a delay in reporting of deaths can
-change the shape of an epidemic curve: delayed reporting is expected to decrease
+change the shape of an epidemic curve: delays in case reports can decrease
 the size of the observed epidemic peak and delay the observed timing of the peak (Figure 1). 
-Ignoring delays in reporting may affect conclusions about the underlying 
+
+There is some empirical evidence that delays in case notification alters the
+shape of an epidemic curve and affects our understanding of disease transmission:
+(1) Postal delays in measles notification during holidays lead to sudden
+epidemic peaks after holidays \citep{fine1982measles}; 
+(2) Delays in reports of the foot-and-mouth infection affects the effectiveness
+of slaughter policies on epidemic intervention;
+and (3) Date of wills written and date of wills probated during
+the plague epidemics in London give completely different looking epidemic curves
+due to extremely long delays (mean of 2.9 years) between the two \citep{bushby2019wills}.
+Ignoring such delays in reporting may affect conclusions about the underlying 
 transmission mechanisms.
 
 Our study shows that a seemingly negligible change in the assumptions of an epidemic
