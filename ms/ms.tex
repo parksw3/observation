@@ -35,7 +35,7 @@ Epidemic models provide valuable tools for understanding how a disease
 spreads in a population. Many epidemic models focus on characterizing
 the underlying transmission mechanism but make naive assumptions about
 how infections are reported. In this note, we use a simple deterministic
-Susceptible-Infected-Removed (SIR) model to compare two popular assumptions 
+Susceptible-Infected-Removed (SIR) model to compare two common assumptions 
 about disease incidence reports: individuals can report their infection as soon as
 they become infected or as soon as they recover. We show that making
 wrong assumptions about the underlying observation processes can result
@@ -47,9 +47,9 @@ intervals.
 Mechanistic analyses of epidemic time series allow us to infer the underlying 
 transmission mechanism, estimate biologically relevant parameters, and 
 predict the course of an outbreak \citep{breto2009time}. In order to make a 
-precise and accurate inference, disease modelers try to build
+precise and accurate inference, disease modelers have sought to build
 more realistic process models. For example, the same London measles time 
-series from the prevaccination era has been analyzed using multiple models -- 
+series from the prevaccination era has been analyzed many times -- 
 these models account for time-varying transmission rates \citep{fine1982measles}, 
 realistic age structure \citep{schenzle1984age},
 metapopulation structure \citep{xia2004measles}, continuous-time infection process 
@@ -57,11 +57,11 @@ metapopulation structure \citep{xia2004measles}, continuous-time infection proce
 
 Despite the amount of effort put into developing \emph{better} process models, disease 
 modelers often neglect details of the observation process associated with disease
-case reports. Most disease models effectively assume that new cases are reported
+case reports. Many disease models effectively assume that new cases are reported
 instantaneously when an individual is infected (e.g., \cite{martinez2016differential, 
 kennedy2018modeling, pons2018serotype}) or develops symptom (e.g., 
 \cite{bhadra2011malaria, king2015avoidable}); 
-a few models (e.g.,\cite{breto2009time, he2009plug, lin2016seasonality})
+some models (e.g., \cite{breto2009time, he2009plug, lin2016seasonality})
 assume that infections are counted upon recovery (because diagnosed cases
 are controlled and are effectively no longer infectious). 
 
@@ -109,7 +109,7 @@ mean either $\rho i_1(t)$ or $\rho i_2(t)$, where $\rho$ is the reporting rate, 
 an over-dispersion parameter $\theta$. For convenience, we will refer to these two
 negative binomial models as infection model and recovery model hereafter; 
 likewise, we will refer to epidemic time series generated from these
-negative binomial models 
+negative binomial models with two different means ($\rho i_1(t)$ and $\rho i_2(t)$)
 as infection time series and recovery time series.
 
 In this study, we focus on estimating 5 parameters: the basic reproductive
@@ -121,9 +121,8 @@ size $N$ is assumed to be known.
 
 \section{Results}
 
-First, we compare the deterministic dynamics of incidence curves, 
-$i_1(t)$ and $i_2(t)$, 
-(Figure 1). A lag in reporting time delays
+First, we compare the deterministic dynamics of incidence curves,
+$i_1(t)$ and $i_2(t)$, in Figure 1. A lag in reporting time delays
 the observed epidemic peak timing and reduces the size of the peak. However, 
 these differences in the reporting time have small effect to the overall shape 
 of the epidemic curve. In the presence of observation and process error, we 
@@ -173,9 +172,9 @@ Some models do not make a clear distinction between these two quantities.
 \end{table}
 
 In order to understand how assumptions about the timing of case reporting affect 
-parameter estimates of the SIR model, we simulate observed epidemic curves 
-(i.e., infection time series and recovery time series), measured upon both infection and
-recovery, 100 times and fit both models (i.e., infection model and recovery model) to each 
+parameter estimates of the SIR model, we simulate observed epidemic time series
+(infection time series and recovery time series) 
+100 times and fit both infection and recovery models to each 
 time series. We compare the estimates of the basic reproductive number $\mathcal R_0$,
 and its coverage probability, defined as the proportion of confidence intervals that
 contain the true value (95\% confidence interval is expected to contain the true value
@@ -207,10 +206,10 @@ that contain the true value of the basic reproductive number ($\mathcal R_0$).
 Disease modelers often assume that the mean infectious period of a disease
 is known and focus on estimating the basic reproduction number (e.g.,
 \cite{hooker2010parameterizing, lin2016seasonality, pons2018serotype}). 
-When we assume that the mean infectious period is known
+When we assume that the true value of the mean infectious period is known
 and try to estimate the remaining 4 parameters of the SIR model, fitting the
 wrong model results in a clearer bias and a much lower coverage (Figure 2B); however, 
-bias from fitting the wrong model changes direction (e.g., fitting the infection
+bias changes direction (e.g., fitting the infection
 model to recovery model overestimates the reproduction number instead). 
 
 Differences in the direction of the bias can be explained by the estimates of the
@@ -261,9 +260,9 @@ data but assumed that individual deaths are recorded as soon as individuals die
 deaths per week from plague with instantaneous death \emph{rates} ($dR/dt$).
 This assumption does not account for the possibility 
 that a delay in reporting of deaths can
-change the shape of an epidemic curve: longer delays are expected to decrease
-the size of an epidemic peak and delay the timing of the peak (Figure 1). 
-Ignoring delays in reporting may affect their conclusions about the underlying 
+change the shape of an epidemic curve: delayed reporting is expected to decrease
+the size of the observed epidemic peak and delay the observed timing of the peak (Figure 1). 
+Ignoring delays in reporting may affect conclusions about the underlying 
 transmission mechanisms.
 
 Our study shows that a seemingly negligible change in the assumptions of an epidemic
