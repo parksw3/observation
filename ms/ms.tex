@@ -145,9 +145,32 @@ $I(t)$, which is defined as the number of \emph{currently} infected individuals;
 the observed dynamics of incidence depend on the reporting time step (because the sum of 
 true incidence is equal to the final size of an epidemic), whereas those of
 prevalence do not. We expect the dynamics of incidence and prevalence to be similar only when
-the reporting time step is equal to the disease generation time. While it is
-uncommon, some models do not make a clear distinction between the two (e.g., 
-\cite{hooker2010parameterizing}).
+the reporting time step is equal to the disease generation time. While they are relatively
+uncommon, some models do not make a clear distinction between a discrete-time observed 
+variable and a continuous-time latent variable (Table 1).
+
+\begin{table}
+\centering
+\begin{tabular}{l | c | c}
+\hline
+\textbf{Study} & \textbf{Disease} &  \textbf{Observed variables}\\
+\hline
+\cite{capistran2009parameter} & Respiratory syncytial virus & Number of hospital cases\\
+\cite{hooker2010parameterizing} & Measles & Number of reported cases\\
+\cite{eisenberg2013identifiability} & Cholera & Number of reported cases\\
+\cite{yang2013stability} & Hand-foot-mouth disease & Number of reported cases\\
+\cite{gonzalez2014fractional} & Influenza & Number of confirmed cases\\
+\hline
+\end{tabular}
+\caption{
+\textbf{List of studies that fit prevalence curves to incidence data.}
+Incidence, defined as the number of new cases between two reporting periods, depends
+on the reporting time step.
+Prevalence, defined as the number of currently infected individuals, does not depend
+on the reporting time step.
+Some models do not make a clear distinction between these two quantities.
+}
+\end{table}
 
 In order to understand how assumptions about the timing of case reporting affect 
 parameter estimates of the SIR model, we simulate observed epidemic curves 
@@ -222,27 +245,29 @@ individuals become infected or when they recover. Although neither of these
 assumptions is realistic, they are broadly consistent with the assumptions
 of other state-of-art epidemic models (see Introduction). 
 More realistic models may distinguish reported and unreported
-(identified and unidentified) cases by adding
+(i.e., identified and unidentified) cases by adding
 new state variables \citep{browne2015modeling,webb2015model} 
 or by modeling an explicit delay kernel in reporting time 
 \citep{harris1990reporting, ferguson2001foot, ster2009epidemiological, 
 birrell2011bayesian, funk2018real}.
 
-While we have only considered observation processes associated with incidence 
+While we only considered observation processes associated with incidence 
 reporting in this study, it is equally as important to consider observation
 processes in mortality reporting. In particular, many disease modelers have
 tried to infer underlying transmission mechanisms from historical mortality 
 data but assumed that individual deaths are recorded as soon as individuals die 
-\citep{he2013inferring, didelot2017model, dean2018human}. 
+\citep{he2013inferring, didelot2017model, dean2018human}; this includes
+\cite{kermack1927contribution} who approximated the reported \emph{number} of
+deaths per week from plague with instantaneous death \emph{rates} ($dR/dt$).
 This assumption does not account for the possibility 
 that a delay in reporting of deaths can
 change the shape of an epidemic curve: longer delays are expected to decrease
 the size of an epidemic peak and delay the timing of the peak (Figure 1). 
-Ignoring potential delays in reporting may affect their conclusions about the underlying 
+Ignoring delays in reporting may affect their conclusions about the underlying 
 transmission mechanisms.
 
-Our study shows that seemingly irrelevant changes in the assumptions of an epidemic
-model affects the inference of infectious disease transmission.
+Our study shows that a seemingly negligible change in the assumptions of an epidemic
+model can affect the inference of infectious disease transmission.
 We caution disease modelers to be more mindful about their decisions in developing
 epidemic models and the implications of their model assumptions.
 
