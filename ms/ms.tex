@@ -247,9 +247,9 @@ assumptions (see Introduction).
 More realistic models may distinguish reported and unreported
 (i.e., identified and unidentified) cases by adding
 new state variables \citep{browne2015modeling,webb2015model} 
-or by modeling an explicit delay kernel in reporting time 
-\citep{harris1990reporting, ferguson2001foot, ster2009epidemiological, 
-birrell2011bayesian, funk2018real}.
+or by modeling an explicit delay distribution in reporting time 
+\citep{harris1990reporting, ferguson2001foot, goldstein2009reconstructing,
+ster2009epidemiological, birrell2011bayesian, funk2018real}.
 
 We considered observation processes associated with incidence 
 reporting; however, we expect observation processes to be just as important
@@ -275,6 +275,16 @@ the plague epidemics in London give completely different looking epidemic curves
 due to extremely long delays (mean of 2.9 years) between the two \citep{bushby2019wills}.
 Ignoring such delays in reporting may affect conclusions about the underlying 
 transmission mechanisms.
+
+Here, we assumed that the underlying transmission process is deterministic; this 
+assumes that all error can be explained by observation errors alone. 
+We chose to study a deterministic model SIR for computational efficiency; 
+we do not recommend using deterministic models for real outbreak analyses.
+Ignoring process errors (i.e., stochasticity in the transmission process) can lead to
+overly confident results \citep{king2015avoidable}. Using stochastic models may
+even give better coverage probabilities when wrong observation models are used. 
+Nonetheless, misspecifying the observation model can still affect conclusions from 
+stochastic models and introduce bias.
 
 Our study shows that a seemingly negligible change in the assumptions of an epidemic
 model can affect the inference of infectious disease transmission.
