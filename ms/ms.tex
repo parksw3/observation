@@ -1,4 +1,4 @@
-\documentclass{article}\usepackage[]{graphicx}\usepackage[]{color}
+\documentclass[12pt]{article}\usepackage[]{graphicx}\usepackage[]{color}
 \usepackage[top=1in,left=1in, right = 1in, footskip=1in]{geometry}
 
 \title{A note on observation processes in epidemic models}
@@ -121,14 +121,6 @@ size $N$ is assumed to be known.
 
 \section{Results}
 
-First, we compare the deterministic dynamics of incidence curves,
-$i_1(t)$ and $i_2(t)$, in Figure 1. A lag in reporting time delays
-the observed epidemic peak timing and reduces the size of the peak. However, 
-these differences in the reporting time have small effect to the overall shape 
-of the epidemic curve. In the presence of observation and process error, we 
-might not expect to be able to distinguish between the two reporting processes
-based on the time series alone. 
-
 \begin{figure}[!t]
 \includegraphics[width=\textwidth]{../figure/example.pdf}
 \caption{
@@ -138,6 +130,14 @@ $\mathcal R_0 = 2$, $1/\gamma = 1$ time units, $N = 1 \times 10^5$, $i0 = 1 \tim
 and $\Delta t = 0.1$ time units.
 }
 \end{figure}
+
+First, we compare the deterministic dynamics of incidence curves,
+$i_1(t)$ and $i_2(t)$, in Figure 1. A lag in reporting time delays
+the observed epidemic peak timing and reduces the size of the peak. However, 
+these differences in the reporting time have small effect to the overall shape 
+of the epidemic curve. In the presence of observation and process error, we 
+might not expect to be able to distinguish between the two reporting processes
+based on the time series alone. 
 
 Note that incidence is different from prevalence,
 $I(t)$, which is defined as the number of \emph{currently} infected individuals;
@@ -227,7 +227,7 @@ Likewise, fitting the infection model to a recovery time series underestimates
 the growth rate to match the smaller (and slower) epidemic peak; this 
 underestimates the basic reproduction number when the mean infectious period is fixed. 
 When we allow the mean infectious period to vary, we overestimate the mean infectious
-period, which in turn increaseses the estimate of the basic reproduction number.
+period, which in turn increases the estimate of the basic reproduction number.
 
 \section{Discussion}
 
