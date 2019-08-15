@@ -47,11 +47,16 @@ for (i in 1:8) {
 summdata <- summlist %>%
 	bind_rows
 
+summdata %>%
+	group_by(data, fit, inf) %>%
+	summarize(bias=(mean(estimate)-2)/2)
+
 g1 <- ggplot(filter(summdata, inf=="estimated")) +
 	geom_boxplot(aes(x=data, y=estimate, fill=fit), width=0.5) +
 	geom_hline(yintercept=2, lty=2) +
 	scale_x_discrete("Simulated timing") +
-	scale_y_continuous("Basic reproductive number") +
+	scale_y_continuous("Basic reproductive number",
+					   limits=c(1.7, 2.6)) +
 	theme(
 		legend.position="none"
 	)
@@ -74,7 +79,7 @@ g2 <- ggplot(filter(coverdata, inf=="estimated")) +
 	)
 
 g3 <- g1 %+% filter(summdata, inf=="fixed")
-
+	
 g4 <- g2 %+% filter(coverdata, inf=="fixed") +
 	theme(legend.position="none")
 
