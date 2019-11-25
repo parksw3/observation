@@ -67,20 +67,20 @@ are controlled and are effectively no longer infectious).
 \bmb{Maybe mention King et al. -- completely ignored observation processes}
 
 Note that incidence (the number of \emph{newly} infected individuals) is different from 
-prevalence (the number of \emph{currently} infected individuals) \citep{bjornstad2018epidemics};
+prevalence (the number of \emph{currently} infected individuals) \citep{bjornstad2018epidemics}:
 the observed dynamics of incidence depend on the reporting time step (because the sum of 
 true incidence is equal to the final size of an epidemic), whereas those of
-prevalence do not. 
+prevalence do not.
 While they are relatively
 uncommon, some models do not make a clear distinction between prevalence and 
 incidence 
 \citep{capistran2009parameter, hooker2010parameterizing, yang2013stability, gonzalez2014fractional}.
 
-Here, we use a simple Susceptible-Infected-Removed (SIR) model to study how 
+Here, we use a simple Susceptible-Infected-Removed (SIR) model to study how
 assumptions about the underlying observation processes affect parameter estimates
-of the SIR model. We show that making wrong assumptions about the timing of 
+of the SIR model. We show that making incorrect assumptions about the timing of 
 incidence reports can lead to biased parameter estimates and overly narrow 
-confidence intervals. 
+confidence intervals.
 
 \section{Methods}
 
@@ -95,10 +95,10 @@ homogeneous population:
 \end{equation}
 where $\beta$ is the contact rate per unit time, $\gamma$ is the recovery rate per unit time, 
 and $N = S + I + R$ is the total population size. 
-We define incidence at time $t$ as the number of newly infected
+We define \emph{true} incidence at time $t$ as the number of newly infected
 individuals that are infected between time $t- \Delta t$ and time $t$, where $\Delta t$ is
 the reporting time step. We expect infected cases to be reported some time after infection;
-the number of reported cases during a time period defines the \emph{observed} incidence. 
+the number of reported cases during a time period defines the \emph{observed} incidence
 
 For brevity, we consider two extreme cases: individuals instantaneously report
 their infection when they become infected or when they recover. The observed incidence 
@@ -109,13 +109,13 @@ i_1(t) = \int_{t - \Delta t}^{t} \beta S \frac{I}{N} dt.
 Equivalently, we can keep track of cumulative incidence, $C$, by adding a 
 new state variable described by $dC/dt = \beta S I/N$ and taking the difference between 
 the two consecutive reporting periods: $i_1(t) = C(t) - C(t-\Delta t)$. Likewise, 
-incidence measured upon recovery, $i_2(t)$, can be defined by the integral:
+the observed incidence measured upon recovery, $i_2(t)$, can be defined by the integral:
 \begin{equation}
 i_2(t) = \int_{t-\Delta t}^{t} \gamma I dt,
 \end{equation}
 or by the consecutive difference in the cumulative number of recovered cases:
 $i_2(t) = R(t) - R(t - \Delta t)$.
-Finally, we model reporting error using a negative binomial distribution with a
+Finally, we model observation error using a negative binomial distribution with a
 mean of either $\rho i_1(t)$ or $\rho i_2(t)$, where $\rho$ is the reporting rate, and
 an over-dispersion parameter $\theta$. For convenience, we will refer to these two
 negative binomial models as infection model and recovery model hereafter; 
@@ -125,7 +125,7 @@ as infection time series and recovery time series.
 
 In this study, we focus on estimating 5 parameters: the basic reproductive
 number $\mathcal R_0 = \beta/\gamma$, mean infectious period $1/\gamma$, 
-reporting rate $\rho$, an overdispersion parameter $\theta$, and the initial
+reporting rate $\rho$, the overdispersion parameter $\theta$, and the initial
 proportion of the infected individuals $i_0$. The initial proportion of
 susceptible individuals is assumed to be $1 - i_0$. The total population
 size $N$ is assumed to be known.
@@ -136,15 +136,26 @@ size $N$ is assumed to be known.
 \includegraphics[width=\textwidth]{../figure/example.pdf}
 \caption{
 \textbf{A comparison of incidence measured at two different time points in infection.}
-A deterministic SIR model is simulated using the following parameters: 
+(A) 
+A deterministic simulation of the SIR model using the following parameters: 
 $\mathcal R_0 = 2$, $1/\gamma = 1$ time units, $N = 1 \times 10^5$, $i0 = 1 \times 10^{-4}$,
 and $\Delta t = 0.1$ time units.
+(B-C) Effects of $\mathcal R_0$ on the relative difference in the size of the epidemic peak ($1 - [\max i_2(t)]/[\max i_1(t)]$) and the difference in the peak timing ($\hat{t}_2 - \hat{t}_1$ where $i_k(\hat{t}_k) = \max i_k(t)$ for $k = 1, 2$) due to lags in reporting time. 
+Black circles: simulation results of the deterministic SIR model.
+Black lines: locally estimated scatterplot smoothing (LOESS) curves fitted to simulation results.
+Remaining parameters are held constant ($1/\gamma = 1$ time units, $N = 1 \times 10^5$, $i0 = 1 \times 10^{-4}$, and $\Delta t = 0.1$ time units) throughout simulations.
 }
 \end{figure}
 
-Figure 1 compares the deterministic dynamics of incidence curves,
-$i_1(t)$ and $i_2(t)$, and a prevalence curve $I(t)$. A lag in reporting time delays
-the observed epidemic peak timing and slightly reduces the size of the peak. However, 
+Figure 1A compares the deterministic dynamics of two incidence curves,
+$i_1(t)$ and $i_2(t)$, and a prevalence curve $I(t)$ for $\mathcal R_0 = 2$. 
+A lag in reporting time delays
+the timing of the observed epidemic peak and reduces the size of that peak.
+As $\mathcal R_0$ increases, the difference in the size of the peaks increases (Figure 1B)
+but the difference in the timing of the peaks decreases (Figure 1C).
+For example, when $\mathcal R_0 = 5$, such delay in the reporting of new cases can reduce the size of the observed epidemic peak by almost 50\%.
+
+For small values of $\mathcal R_0$, 
 these differences in the reporting time have little effect on the overall shape 
 of the epidemic curve. In the presence of observation and process error, we
 do not expect to be able to distinguish between the two reporting processes
@@ -154,7 +165,7 @@ Therefore, one might naively expect assumptions about the timing of case reporti
 In order to understand how assumptions about the timing of case reporting affect 
 parameter estimates of the SIR model, we simulate observed epidemic time series
 (infection time series and recovery time series) 
-100 times and fit both infection and recovery models to each 
+100 times with $\mathcal R_0 = 2$ and fit both infection and recovery models to each 
 time series. We compare the estimates of the basic reproductive number $\mathcal R_0$,
 and the coverage of our confidence intervals, defined as the proportion of confidence intervals that
 contain the true value (95\% confidence interval is expected to contain the true value
@@ -187,10 +198,9 @@ Disease modelers often assume that the mean infectious period of a disease
 is known and focus on estimating the basic reproduction number (e.g.,
 \cite{hooker2010parameterizing, lin2016seasonality, pons2018serotype}). 
 When we assume that the true value of the mean infectious period is known
-and try to estimate the remaining 4 parameters of the SIR model, fitting the
-wrong model results in a clearer bias (in opposite directions) 
-and a much lower coverage (Figure 2B).
-\swp{Cite elderd}
+and try to estimate the remaining 4 parameters of the SIR model (Figure 2B), fitting the
+incorrect model results in a clearer bias (in opposite directions)
+and a much lower coverage (cf. \cite{elderd2006uncertainty}).
 
 Differences in the direction of the bias can be explained by the estimates of the
 exponential growth rate ($r = \beta - \gamma$) and the mean infectious period ($1/\gamma$).
@@ -217,11 +227,9 @@ period, which in turn increases the estimate of the basic reproduction number.
 Mathematical modeling of infectious disease outbreaks helps us understand 
 how disease spreads in a population; however, epidemic models often make 
 simple assumptions about how cases are reported. 
-Here, we used a deterministic SIR model to show that 
-incorrect assumptions about observational processes in epidemic models
-can bias estimates of the basic reproduction number and lead to overly narrow
-confidence intervals.
-\bmb{repetitive}
+We used a deterministic SIR model to show that
+assumptions about observation processes can
+affect the estimates of the basic reproduction number and their associated confidence intervals.
 
 We compared two scenarios in which newly infected cases are reported 
 instantaneously (1) when individuals become infected or
@@ -248,25 +256,13 @@ that a delay in reporting of deaths can
 change the shape of an epidemic curve -- delays in case reports can decrease
 the size of the observed epidemic peak and delay the observed timing of the peak (Figure 1). 
 
-There is some empirical evidence that delays in case notification alters the
-shape of an epidemic curve and affects our understanding of disease transmission:
-(1) Postal delays in measles notification during holidays lead to sudden
-epidemic peaks after holidays \citep{fine1982measles}; 
-(2) Delays in reports of the foot-and-mouth infection affects the effectiveness
-of slaughter policies on epidemic intervention;
-and (3) Date of wills written and date of wills probated during
-the plague epidemics in London give completely different looking epidemic curves
-due to extremely long delays (mean of 2.9 years) between the two \citep{bushby2019wills}.
-Ignoring such delays in reporting may affect conclusions about the underlying 
-transmission mechanisms.
-
 Here, we assumed that the underlying transmission process is deterministic; this 
 assumes that all error can be explained by observation errors alone. 
 We chose to study a deterministic model SIR for computational efficiency; 
 we do not recommend using deterministic models for real outbreak analyses.
 Ignoring process errors (i.e., stochasticity in the transmission process) can lead to
 overly confident results \citep{king2015avoidable}. Using stochastic models may
-even give better coverage probabilities when wrong observation models are used. 
+give better coverage probabilities even  when wrong observation models are used.
 Nonetheless, misspecifying the observation model can still affect conclusions from 
 stochastic models and introduce bias.
 
