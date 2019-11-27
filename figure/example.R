@@ -85,4 +85,4 @@ g3 <- ggplot(fixed_inf_data) +
 gfinal <- arrangeGrob(g1, g2, g3, layout_matrix = matrix(c(1, 1, 2, 3), 2, 2),
                       widths = c(2, 1))
 
-ggsave("example.pdf", gfinal, width=8, height=6)
+ggsave("example.pdf", gfinal, width=9, height=6)
