@@ -27,7 +27,33 @@
 \newcommand{\fref}[1]{Fig.~\ref{fig:#1}}
 \begin{document}
 
-\maketitle
+
+\begin{flushleft}{
+	\Large
+	\textbf\newline{
+		A note on observation processes in epidemic models
+	}
+}
+\newline
+\\
+Sang Woo Park\textsuperscript{1,2,*}
+Benjamin M. Bolker\textsuperscript{2,3,4}
+\\
+
+\bigskip
+\textbf{1} Department of Ecology and Evolutionary Biology, Princeton University, Princeton, New Jersey, USA
+\\
+\textbf{2} Department of Mathematics and Statistics, McMaster University, Hamilton, Ontario, Canada
+\\
+\textbf{3} Department of Biology, McMaster University, Hamilton, Ontario, Canada
+\\
+\textbf{4} Michael G. DeGroote Institute for Infectious Disease Research, McMaster University, Hamilton, Ontario, Canada
+\\
+\bigskip
+
+*swp2@princeton.edu
+\end{flushleft} 
+
 
 \section*{Abstract}
 
@@ -63,8 +89,7 @@ kennedy2018modeling, pons2018serotype}) or when an individual becomes symptomati
 (e.g., \cite{bhadra2011malaria, king2015avoidable}); 
 some models (e.g., \cite{breto2009time, he2009plug, lin2016seasonality})
 assume that infections are counted upon recovery (because diagnosed cases
-are controlled and are effectively no longer infectious). 
-\bmb{Maybe mention King et al. -- completely ignored observation processes}
+are controlled and are effectively no longer infectious).
 
 Note that incidence (the number of \emph{newly} infected individuals) is different from 
 prevalence (the number of \emph{currently} infected individuals) \citep{bjornstad2018epidemics}:
@@ -154,6 +179,7 @@ the timing of the observed epidemic peak and reduces the size of that peak.
 As $\mathcal R_0$ increases, the difference in the size of the peaks increases (Figure 1B)
 but the difference in the timing of the peaks decreases (Figure 1C).
 For example, when $\mathcal R_0 = 5$, such delay in the reporting of new cases can reduce the size of the observed epidemic peak by almost 50\%.
+Note that $i_2(t)$ essentially assumes that the amount of time between when an individual is infected and when an individual reports the infection is exponentially distributed; a fixed delay in reporting time will not change the shape of an epidemic curve.
 
 For small values of $\mathcal R_0$, 
 these differences in the reporting time have little effect on the overall shape 
@@ -173,10 +199,12 @@ contain the true value (95\% confidence interval is expected to contain the true
 
 When we try to estimate all 5 parameters, fitting the recovery model to
 infection time series underestimates the basic reproduction number and 
-gives a slightly low coverage (Figure 2A). Fitting the infection model to recovery
+gives a slightly low coverage (Figure 2A). 
+Fitting the infection model to recovery
 time series slightly overestimates the basic reproduction number but gives 
-good coverage. Fitting the correct models to their corresponding time series
-gives unbiased estimates and good coverage.
+good coverage. 
+We expect fitting incorrect models to give more biased estimates when $\mathcal R_0$ is higher because the differences in the size of observed epidemic peaks become greater.
+Fitting the correct model gives unbiased estimates and good coverage.
 
 \begin{figure}
 \includegraphics[width=\textwidth]{../figure/compare_deterministic.pdf}
@@ -198,8 +226,8 @@ Disease modelers often assume that the mean infectious period of a disease
 is known and focus on estimating the basic reproduction number (e.g.,
 \cite{hooker2010parameterizing, lin2016seasonality, pons2018serotype}). 
 When we assume that the true value of the mean infectious period is known
-and try to estimate the remaining 4 parameters of the SIR model (Figure 2B), fitting the
-incorrect model results in a clearer bias (in opposite directions)
+and try to estimate the remaining 4 parameters of the SIR model (Figure 2B), fitting
+incorrect models results in a clearer bias (in opposite directions)
 and a much lower coverage (cf. \cite{elderd2006uncertainty}).
 
 Differences in the direction of the bias can be explained by the estimates of the
@@ -221,15 +249,10 @@ period, which in turn increases the estimate of the basic reproduction number.
 
 \section{Discussion}
 
-\bmb{Not including process error. Discuss?}
-\bmb{Constant reporting delays don't matter, if system is autonomous}
-
-Mathematical modeling of infectious disease outbreaks helps us understand 
-how disease spreads in a population; however, epidemic models often make 
-simple assumptions about how cases are reported. 
-We used a deterministic SIR model to show that
-assumptions about observation processes can
-affect the estimates of the basic reproduction number and their associated confidence intervals.
+Mathematical modeling of infectious disease outbreaks helps us understand how disease spreads in a population; 
+however, epidemic models often make simple assumptions about how cases are reported. 
+We used a deterministic SIR model to show that delays in case reports affect the observed shape of an epidemic curve and the estimates of the basic reproduction number.
+Even when the basic reproduction number is small (e.g., $\mathcal R_0 = 2$), fitting incorrect models can introduce small bias and give narrow confidence intervals.
 
 We compared two scenarios in which newly infected cases are reported 
 instantaneously (1) when individuals become infected or
@@ -262,8 +285,8 @@ We chose to study a deterministic model SIR for computational efficiency;
 we do not recommend using deterministic models for real outbreak analyses.
 Ignoring process errors (i.e., stochasticity in the transmission process) can lead to
 overly confident results \citep{king2015avoidable}. Using stochastic models may
-give better coverage probabilities even  when wrong observation models are used.
-Nonetheless, misspecifying the observation model can still affect conclusions from 
+give better coverage probabilities even when wrong observation models are used.
+Nonetheless, misspecifying the observation model may still affect conclusions from 
 stochastic models and introduce bias.
 
 Our study shows that a seemingly negligible change in the assumptions of an epidemic

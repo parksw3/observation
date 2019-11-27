@@ -19,7 +19,7 @@ for (i in 1:length(R0vec)) {
     R0=R0vec[i],
     gamma=1,
     N=1e5,
-    rho=0.5
+    rho=1
   )
   
   rr <- run_sir(param=newpar, tmax=200, tlength=0.1)
