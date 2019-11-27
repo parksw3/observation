@@ -161,9 +161,9 @@ size $N$ is assumed to be known.
 A deterministic simulation of the SIR model using the following parameters: 
 $\mathcal R_0 = 2$, $1/\gamma = 1$ time units, $N = 1 \times 10^5$, $i0 = 1 \times 10^{-4}$,
 and $\Delta t = 0.1$ time units.
-(B-C) Effects of $\mathcal R_0$ on the relative difference in the size of the epidemic peak ($1 - [\max i_2(t)]/[\max i_1(t)]$) and the difference in the peak timing ($\hat{t}_2 - \hat{t}_1$ where $i_k(\hat{t}_k) = \max i_k(t)$ for $k = 1, 2$) due to lags in reporting time. 
-Black circles: simulation results of the deterministic SIR model.
-Black lines: locally estimated scatterplot smoothing (LOESS) curves fitted to simulation results.
+(B-C) Effects of $\mathcal R_0$ on the relative difference in the size of the epidemic peak ($1 - [\max i_2(t)]/[\max i_1(t)]$) and the difference in the peak timing ($\hat{t}_2 - \hat{t}_1$ where $i_k(\hat{t}_k) = \max i_k(t)$ for $k = 1, 2$) due to delays in reporting time.
+Open circles: simulation results of the deterministic SIR model.
+Solid lines: locally estimated scatterplot smoothing (LOESS) curves fitted to simulation results.
 Remaining parameters are held constant ($1/\gamma = 1$ time units, $N = 1 \times 10^5$, $i0 = 1 \times 10^{-4}$, and $\Delta t = 0.1$ time units) throughout simulations.
 }
 \end{figure}
@@ -185,7 +185,7 @@ based on the time series alone (and we rarely know \emph{a priori} the delay dis
 Therefore, one might naively expect assumptions about the timing of case reporting to have negligible effect on inference.
 
 In order to understand how assumptions about the timing of case reporting affect 
-parameter estimates of the SIR model, we simulate observed epidemic time series
+parameter estimates of the SIR model, we simulate epidemic time series
 (infection time series and recovery time series) 
 100 times with $\mathcal R_0 = 2$ and fit both infection and recovery models to each 
 time series. We compare the estimates of the basic reproductive number $\mathcal R_0$,

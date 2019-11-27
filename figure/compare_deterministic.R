@@ -70,10 +70,11 @@ coverdata <- summdata %>%
 g2 <- ggplot(filter(coverdata, inf=="estimated")) +
 	geom_rect(xmin=-Inf, xmax=Inf, ymin=binom.test(95, 100)[[4]][1], ymax=binom.test(95, 100)[[4]][2], alpha=0.1) +
 	geom_hline(yintercept=0.95, lty=2) +
-	geom_point(aes(x=data, y=coverage, col=fit, group=fit), size=5, position = position_dodge(width = 0.5)) +
+	geom_point(aes(x=data, y=coverage, col=fit, group=fit, shape=fit), size=5, position = position_dodge(width = 0.5)) +
 	scale_x_discrete("Simulated timing") +
 	scale_y_continuous("Coverage probability", limits=c(0, 1)) +
 	scale_colour_discrete("Fitted timing") +
+  scale_shape_discrete("Fitted timing") +
 	theme(
 		legend.position=c(0.76, 0.2)
 	)
