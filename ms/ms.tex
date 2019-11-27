@@ -91,15 +91,11 @@ some models (e.g., \cite{breto2009time, he2009plug, lin2016seasonality})
 assume that infections are counted upon recovery (because diagnosed cases
 are controlled and are effectively no longer infectious).
 
-Note that incidence (the number of \emph{newly} infected individuals) is different from 
-prevalence (the number of \emph{currently} infected individuals) \citep{bjornstad2018epidemics}:
-the observed dynamics of incidence depend on the reporting time step (because the sum of 
-true incidence is equal to the final size of an epidemic), whereas those of
-prevalence do not.
-While they are relatively
-uncommon, some models do not make a clear distinction between prevalence and 
-incidence 
-\citep{capistran2009parameter, hooker2010parameterizing, yang2013stability, gonzalez2014fractional}.
+We emphasize that incidence (i.e., the number of \emph{newly} infected individuals) is different from prevalence (i.e., the number of \emph{currently} infected individuals) \citep{bjornstad2018epidemics}.
+The dynamics of incidence depend on the reporting time step (because the sum of true incidence is equal to the final size of an epidemic), whereas those of prevalence do not.
+We expect the dynamics of incidence and prevalence to be similar only when the reporting time step is similar to the disease generation time \citep{fine1982measles}.
+While they are uncommon, some models do not make a clear distinction between prevalence and 
+incidence \citep{capistran2009parameter, hooker2010parameterizing, yang2013stability, gonzalez2014fractional}.
 
 Here, we use a simple Susceptible-Infected-Removed (SIR) model to study how
 assumptions about the underlying observation processes affect parameter estimates
