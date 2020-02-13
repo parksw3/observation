@@ -43,18 +43,17 @@ Below please find our responses to reviewers.
 
 The reviewer may have misconstrued our goals in this paper. We were \emph{not} exploring the effects of the process delay distributions (i.e. latent and infectious periods), and their mis-specification, on epidemiological dynamics and parameter estimation. Rather, we were exploring the effects of reporting delays (and their mis-specification) on parameter estimation.
 
-However, reporting delays do depend implicitly on the process delays. We have added the following paragraph in the Discussion to address this point:
+However, reporting delays do depend implicitly on the process delays. We have added the following paragraph in the Discussion with appropriate citations to address this point:
 
-``Delay distributions in reporting time implicitly depend on latent and infectious 
-period distributions. For example, when cases are assumed to be reported
+``Distributions of reporting time delays implicitly depend on the latent and infectious 
+period distributions. For example, when cases are reported
 at the end of infectious periods,
 the delay distribution is equivalent to the convolution of the latent and
-infectious period distributions. These distributions play important roles in 
-shaping the epidemiological dynamics, including the probability and size of an outbreak, 
-the stability and persistence of a system, and the 
-prediction of dynamical transitions. Assumptions about
-latent and infectious period distributions can also have large effects on the
-estimates of the basic reproductive number.''
+infectious period distributions. These distributions also play important roles in 
+shaping the epidemiological dynamics,
+including the probability and size of an outbreak, the stability and persistence of a system,
+and the  occurrence of dynamical transitions.
+Assumptions about latent and infectious period distributions can also have large effects on the estimates of the basic reproductive number.''
 
 Although we could extend the paper to consider dynamics (and reporting time delays) based on more realistic distributions, our goal here was to evaluate the effects of these assumptions qualitatively, in the simplest possible epidemiological model.
 
@@ -69,13 +68,13 @@ question can only be answered on a case-by-case basis.  In the absence of such u
 
 We agree. We did not intend to say that modelers should always strive to build the more complex models. We have revised the final paragraph of the Discussion to better reflect our intentions:
 
-``All statistical models must rely on simplifying assumptions.
-Given a range of choices of assumptions one can make, modelers have to
-decide which aspect of a system they wish to capture 
+``All statistical models rely on simplifying assumptions.
+Given a range of possible assumptions, modelers have to
+decide which aspects of a system to capture 
 at the cost of simplifying other aspects.
-However, some assumptions are often more carefully tested than others.
-In the case of epidemic models, assumptions about the process of transmission tend to be
-the most important ones; processes through which cases are reported are often 
+However, some assumptions are often taken for granted.
+Epidemic modelers tend to focus on assumptions about the
+transmission process; processes through which cases are reported are often 
 overlooked and simplified.
 Our study shows that a seemingly negligible change in the assumptions of an epidemic
 model can affect the inference of 
@@ -83,7 +82,7 @@ infectious disease transmission.
 Although the amount of bias introduced from the misspecification of the observation
 model can be small (e.g., less than 5\% in our examples), modelers
 trying to make serious predictions may want to control for potential biases.
-We caution disease modelers to be more careful about modeling decisions as they may have unexpected consequences on the inference.''
+We caution disease modelers to be more careful about their modeling decisions as they may have unexpected consequences on the inference.''
 
 \revtext{As trivia, perhaps I missed something, but the distinction between the boxplots within each pair in the left panels of Fig 2 was not immediately clear to me.  I guessed at the distinction by comparison with the parallel structure of the panels on the right of the figure.}
 

@@ -1,0 +1,403 @@
+\documentclass[12pt]{article}\usepackage[]{graphicx}\usepackage[]{color}
+%DIF LATEXDIFF DIFFERENCE FILE
+
+
+\usepackage[top=1in,left=1in, right = 1in, footskip=1in]{geometry}
+
+\title{A note on observation processes in epidemic models}
+\author{Sang Woo Park and Benjamin M. Bolker}
+
+\usepackage{tabularx}
+
+\usepackage{amsmath}
+\usepackage{natbib}
+\usepackage{hyperref}
+\bibliographystyle{chicago}
+\date{\today}
+
+\usepackage{bm}
+
+\usepackage{afterpage}
+\usepackage{pdflscape}
+
+\newcommand{\etal}{\textit{et al.}}
+
+\newcommand{\comment}[3]{\textcolor{#1}{\textbf{[#2: }\textit{#3}\textbf{]}}}
+\newcommand{\bmb}[1]{\comment{cyan}{BMB}{#1}}
+\newcommand{\swp}[1]{\comment{magenta}{SWP}{#1}}
+\newcommand{\citetapos}[1]{\citeauthor{#1}'s \citeyearpar{#1}}
+
+\newcommand{\fref}[1]{Fig.~\ref{fig:#1}}
+%DIF PREAMBLE EXTENSION ADDED BY LATEXDIFF
+%DIF UNDERLINE PREAMBLE %DIF PREAMBLE
+\RequirePackage[normalem]{ulem} %DIF PREAMBLE
+\RequirePackage{color}\definecolor{RED}{rgb}{1,0,0}\definecolor{BLUE}{rgb}{0,0,1} %DIF PREAMBLE
+\providecommand{\DIFaddtex}[1]{{\protect\color{blue}\textbf{#1}}} %DIF PREAMBLE
+\providecommand{\DIFdeltex}[1]{{\protect\color{red}\sout{#1}}}                      %DIF PREAMBLE
+%DIF SAFE PREAMBLE %DIF PREAMBLE
+\providecommand{\DIFaddbegin}{} %DIF PREAMBLE
+\providecommand{\DIFaddend}{} %DIF PREAMBLE
+\providecommand{\DIFdelbegin}{} %DIF PREAMBLE
+\providecommand{\DIFdelend}{} %DIF PREAMBLE
+%DIF FLOATSAFE PREAMBLE %DIF PREAMBLE
+\providecommand{\DIFaddFL}[1]{\DIFadd{#1}} %DIF PREAMBLE
+\providecommand{\DIFdelFL}[1]{\DIFdel{#1}} %DIF PREAMBLE
+\providecommand{\DIFaddbeginFL}{} %DIF PREAMBLE
+\providecommand{\DIFaddendFL}{} %DIF PREAMBLE
+\providecommand{\DIFdelbeginFL}{} %DIF PREAMBLE
+\providecommand{\DIFdelendFL}{} %DIF PREAMBLE
+%DIF HYPERREF PREAMBLE %DIF PREAMBLE
+\providecommand{\DIFadd}[1]{\texorpdfstring{\DIFaddtex{#1}}{#1}} %DIF PREAMBLE
+\providecommand{\DIFdel}[1]{\texorpdfstring{\DIFdeltex{#1}}{}} %DIF PREAMBLE
+\newcommand{\DIFscaledelfig}{0.5}
+%DIF HIGHLIGHTGRAPHICS PREAMBLE %DIF PREAMBLE
+\RequirePackage{settobox} %DIF PREAMBLE
+\RequirePackage{letltxmacro} %DIF PREAMBLE
+\newsavebox{\DIFdelgraphicsbox} %DIF PREAMBLE
+\newlength{\DIFdelgraphicswidth} %DIF PREAMBLE
+\newlength{\DIFdelgraphicsheight} %DIF PREAMBLE
+% store original definition of \includegraphics %DIF PREAMBLE
+\LetLtxMacro{\DIFOincludegraphics}{\includegraphics} %DIF PREAMBLE
+\newcommand{\DIFaddincludegraphics}[2][]{{\color{blue}\fbox{\DIFOincludegraphics[#1]{#2}}}} %DIF PREAMBLE
+\newcommand{\DIFdelincludegraphics}[2][]{% %DIF PREAMBLE
+\sbox{\DIFdelgraphicsbox}{\DIFOincludegraphics[#1]{#2}}% %DIF PREAMBLE
+\settoboxwidth{\DIFdelgraphicswidth}{\DIFdelgraphicsbox} %DIF PREAMBLE
+\settoboxtotalheight{\DIFdelgraphicsheight}{\DIFdelgraphicsbox} %DIF PREAMBLE
+\scalebox{\DIFscaledelfig}{% %DIF PREAMBLE
+\parbox[b]{\DIFdelgraphicswidth}{\usebox{\DIFdelgraphicsbox}\\[-\baselineskip] \rule{\DIFdelgraphicswidth}{0em}}\llap{\resizebox{\DIFdelgraphicswidth}{\DIFdelgraphicsheight}{% %DIF PREAMBLE
+\setlength{\unitlength}{\DIFdelgraphicswidth}% %DIF PREAMBLE
+\begin{picture}(1,1)% %DIF PREAMBLE
+\thicklines\linethickness{2pt} %DIF PREAMBLE
+{\color[rgb]{1,0,0}\put(0,0){\framebox(1,1){}}}% %DIF PREAMBLE
+{\color[rgb]{1,0,0}\put(0,0){\line( 1,1){1}}}% %DIF PREAMBLE
+{\color[rgb]{1,0,0}\put(0,1){\line(1,-1){1}}}% %DIF PREAMBLE
+\end{picture}% %DIF PREAMBLE
+}\hspace*{3pt}}} %DIF PREAMBLE
+} %DIF PREAMBLE
+\LetLtxMacro{\DIFOaddbegin}{\DIFaddbegin} %DIF PREAMBLE
+\LetLtxMacro{\DIFOaddend}{\DIFaddend} %DIF PREAMBLE
+\LetLtxMacro{\DIFOdelbegin}{\DIFdelbegin} %DIF PREAMBLE
+\LetLtxMacro{\DIFOdelend}{\DIFdelend} %DIF PREAMBLE
+\DeclareRobustCommand{\DIFaddbegin}{\DIFOaddbegin \let\includegraphics\DIFaddincludegraphics} %DIF PREAMBLE
+\DeclareRobustCommand{\DIFaddend}{\DIFOaddend \let\includegraphics\DIFOincludegraphics} %DIF PREAMBLE
+\DeclareRobustCommand{\DIFdelbegin}{\DIFOdelbegin \let\includegraphics\DIFdelincludegraphics} %DIF PREAMBLE
+\DeclareRobustCommand{\DIFdelend}{\DIFOaddend \let\includegraphics\DIFOincludegraphics} %DIF PREAMBLE
+\LetLtxMacro{\DIFOaddbeginFL}{\DIFaddbeginFL} %DIF PREAMBLE
+\LetLtxMacro{\DIFOaddendFL}{\DIFaddendFL} %DIF PREAMBLE
+\LetLtxMacro{\DIFOdelbeginFL}{\DIFdelbeginFL} %DIF PREAMBLE
+\LetLtxMacro{\DIFOdelendFL}{\DIFdelendFL} %DIF PREAMBLE
+\DeclareRobustCommand{\DIFaddbeginFL}{\DIFOaddbeginFL \let\includegraphics\DIFaddincludegraphics} %DIF PREAMBLE
+\DeclareRobustCommand{\DIFaddendFL}{\DIFOaddendFL \let\includegraphics\DIFOincludegraphics} %DIF PREAMBLE
+\DeclareRobustCommand{\DIFdelbeginFL}{\DIFOdelbeginFL \let\includegraphics\DIFdelincludegraphics} %DIF PREAMBLE
+\DeclareRobustCommand{\DIFdelendFL}{\DIFOaddendFL \let\includegraphics\DIFOincludegraphics} %DIF PREAMBLE
+%DIF END PREAMBLE EXTENSION ADDED BY LATEXDIFF
+
+\begin{document}
+
+
+\begin{flushleft}{
+	\Large
+	\textbf\newline{
+		A note on observation processes in epidemic models
+	}
+}
+\newline
+\\
+Sang Woo Park\textsuperscript{1,2,*}
+Benjamin M. Bolker\textsuperscript{2,3,4}
+\\
+
+\bigskip
+\textbf{1} Department of Ecology and Evolutionary Biology, Princeton University, Princeton, New Jersey, USA
+\\
+\textbf{2} Department of Mathematics and Statistics, McMaster University, Hamilton, Ontario, Canada
+\\
+\textbf{3} Department of Biology, McMaster University, Hamilton, Ontario, Canada
+\\
+\textbf{4} Michael G. DeGroote Institute for Infectious Disease Research, McMaster University, Hamilton, Ontario, Canada
+\\
+\bigskip
+
+*swp2@princeton.edu
+\end{flushleft} 
+
+
+\section*{Abstract}
+
+Many disease models focus on characterizing
+the underlying transmission mechanism but make simple, possibly naive assumptions about
+how infections are reported. In this note, we use a simple deterministic
+Susceptible-Infected-Removed (SIR) model to compare two common assumptions 
+about disease incidence reports: individuals can report their infection as soon as
+they become infected or as soon as they recover. We show that
+incorrect assumptions about the underlying observation processes can bias
+estimates of the basic reproduction number and lead to overly
+narrow confidence intervals.
+
+\section{Introduction}
+
+Mechanistic analyses of epidemic time series allow us to make inference about the underlying 
+transmission mechanisms, estimate biologically relevant parameters, and 
+predict the course of an outbreak \citep{breto2009time}. In order to make 
+precise and accurate inferences, disease modelers have sought to build
+more realistic process models. For example, the time series of reported
+measles cases from London in the prevaccination era has been analyzed many times, using
+variety of models accounting for time-varying transmission rates \citep{fine1982measles}, 
+realistic age structure \citep{schenzle1984age},
+metapopulation structure \citep{xia2004measles}, continuous-time infection processes 
+\citep{cauchemez2008likelihood}, and extra-demographic variability \citep{he2009plug}. 
+
+Despite the amount of effort put into developing better process models, 
+disease modelers often neglect details of the observation processes associated with
+new disease case reports (often referred to as incidence time series).
+Many disease models effectively assume that new cases are reported
+instantaneously when an individual is infected (e.g., \cite{martinez2016differential, 
+kennedy2018modeling, pons2018serotype}) or when an individual becomes symptomatic
+(e.g., \cite{bhadra2011malaria, king2015avoidable}); 
+some models (e.g., \cite{breto2009time, he2009plug, lin2016seasonality})
+assume that infections are counted upon recovery (because diagnosed cases
+are controlled and are effectively no longer infectious).
+
+We emphasize that incidence (i.e., the number of \emph{newly} infected individuals) is different from prevalence (i.e., the number of \emph{currently} infected individuals) \citep{bjornstad2018epidemics}.
+The dynamics of incidence depend on the reporting time step (because the sum of true incidence is equal to the final size of an epidemic), whereas those of prevalence do not.
+We expect the dynamics of incidence and prevalence to be similar only when the reporting time step is similar to the disease generation time \citep{fine1982measles}.
+While they are uncommon, some models do not make a clear distinction between prevalence and 
+incidence \citep{capistran2009parameter, hooker2010parameterizing, yang2013stability, gonzalez2014fractional}.
+
+Here, we use a simple Susceptible-Infected-Removed (SIR) model to study how
+assumptions about the underlying observation processes affect parameter estimates
+of the SIR model. We show that making incorrect assumptions about the timing of 
+incidence reports can lead to biased parameter estimates and overly narrow 
+confidence intervals.
+
+\section{Methods}
+
+The Susceptible-Infected-Removed (SIR) model describes how a disease spreads in a
+homogeneous population:
+\begin{equation}
+\begin{aligned}
+\frac{dS}{dt} &= - \beta S \frac{I}{N}\\
+\frac{dI}{dt} &= \beta S \frac{I}{N} - \gamma I\\
+\frac{dR}{dt} &= \gamma I,
+\end{aligned}
+\end{equation}
+where $\beta$ is the contact rate per unit time, $\gamma$ is the recovery rate per unit time, 
+and $N = S + I + R$ is the total population size. 
+We define \emph{true} incidence at time $t$ as the number of newly infected
+individuals that are infected between time $t- \Delta t$ and time $t$, where $\Delta t$ is
+the reporting time step. We expect infected cases to be reported some time after infection;
+the number of reported cases during a time period defines the \emph{observed} incidence
+
+For brevity, we consider two extreme cases: individuals instantaneously report
+their infection when they become infected or when they recover. The observed incidence 
+measured upon infection, $i_1(t)$, can be defined by the integral:
+\begin{equation}
+i_1(t) = \int_{t - \Delta t}^{t} \beta S \frac{I}{N} dt.
+\end{equation}
+Equivalently, we can keep track of cumulative incidence, $C$, by adding a 
+new state variable described by $dC/dt = \beta S I/N$ and taking the difference between 
+the two consecutive reporting periods: $i_1(t) = C(t) - C(t-\Delta t)$. Likewise, 
+the observed incidence measured upon recovery, $i_2(t)$, can be defined by the integral:
+\begin{equation}
+i_2(t) = \int_{t-\Delta t}^{t} \gamma I dt,
+\end{equation}
+or by the consecutive difference in the cumulative number of recovered cases:
+$i_2(t) = R(t) - R(t - \Delta t)$.
+Finally, we model observation error using a negative binomial distribution with a
+mean of either $\rho i_1(t)$ or $\rho i_2(t)$, where $\rho$ is the reporting rate, and
+an over-dispersion parameter $\theta$. For convenience, we will refer to these two
+negative binomial models as infection model and recovery model hereafter; 
+similarly, we will refer to epidemic time series generated from these
+negative binomial models with two different means ($\rho i_1(t)$ and $\rho i_2(t)$)
+as infection time series and recovery time series.
+
+In this study, we focus on estimating 5 parameters: the basic reproductive
+number $\mathcal R_0 = \beta/\gamma$, mean infectious period $1/\gamma$, 
+reporting rate $\rho$, the overdispersion parameter $\theta$, and the initial
+proportion of the infected individuals $i_0$. The initial proportion of
+susceptible individuals is assumed to be $1 - i_0$. The total population
+size $N$ is assumed to be known.
+
+\section{Results}
+
+\begin{figure}[!t]
+\DIFdelbeginFL %DIFDELCMD < \includegraphics[width=\textwidth]{../figure/example.pdf}
+%DIFDELCMD < %%%
+\DIFdelendFL \DIFaddbeginFL \includegraphics[width=\textwidth]{example.pdf}
+\DIFaddendFL \caption{
+\textbf{A comparison of incidence measured at two different time points in infection.}
+(A) 
+A deterministic simulation of the SIR model using the following parameters: 
+$\mathcal R_0 = 2$, $1/\gamma = 1$ time units, $N = 1 \times 10^5$, \DIFdelbeginFL \DIFdelFL{$i0 = 1 \times 10^{-4}$}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{$i_0 = 1 \times 10^{-4}$}\DIFaddendFL ,
+and $\Delta t = 0.1$ time units.
+(B-C) Effects of $\mathcal R_0$ on the relative difference in the size of the epidemic peak ($1 - [\max i_2(t)]/[\max i_1(t)]$) and the difference in the peak timing ($\hat{t}_2 - \hat{t}_1$ where $i_k(\hat{t}_k) = \max i_k(t)$ for $k = 1, 2$) due to delays in reporting time.
+Open circles: simulation results of the deterministic SIR model.
+Solid lines: locally estimated scatterplot smoothing (LOESS) curves fitted to simulation results.
+Remaining parameters are held constant ($1/\gamma = 1$ time units, $N = 1 \times 10^5$, \DIFdelbeginFL \DIFdelFL{$i0 = 1 \times 10^{-4}$}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{$i_0 = 1 \times 10^{-4}$}\DIFaddendFL , and $\Delta t = 0.1$ time units) throughout simulations.
+}
+\end{figure}
+
+Figure 1A compares the deterministic dynamics of two incidence curves,
+$i_1(t)$ and $i_2(t)$, and a prevalence curve $I(t)$ for $\mathcal R_0 = 2$. 
+A lag in reporting time delays
+the timing of the observed epidemic peak and reduces the size of that peak.
+As $\mathcal R_0$ increases, the difference in the size of the peaks increases (Figure 1B)
+but the difference in the timing of the peaks decreases (Figure 1C).
+For example, when $\mathcal R_0 = 5$, such delay in the reporting of new cases can reduce the size of the observed epidemic peak by almost 50\%.
+Note that $i_2(t)$ essentially assumes that the amount of time between when an individual is infected and when an individual reports the infection is exponentially distributed; a fixed delay in reporting time will not change the shape of an epidemic curve.
+
+For small values of $\mathcal R_0$, 
+these differences in the reporting time have little effect on the overall shape 
+of the epidemic curve. In the presence of observation and process error, we
+do not expect to be able to distinguish between the two reporting processes
+based on the time series alone (and we rarely know \emph{a priori} the delay distribution between when an individual is infected and when that case is reported).
+Therefore, one might naively expect assumptions about the timing of case reporting to have negligible effect on inference.
+
+In order to understand how assumptions about the timing of case reporting affect 
+parameter estimates of the SIR model, we simulate epidemic time series
+(infection time series and recovery time series) 
+100 times with $\mathcal R_0 = 2$ and fit both infection and recovery models to each 
+time series. We compare the estimates of the basic reproductive number $\mathcal R_0$,
+and the coverage of our confidence intervals, defined as the proportion of confidence intervals that
+contain the true value (95\% confidence interval is expected to contain the true value
+95\% of the time by definition). Figure 2 summarizes the results.
+
+When we try to estimate all 5 parameters, fitting the recovery model to
+infection time series underestimates the basic reproduction number and 
+gives a slightly low coverage (Figure 2A). 
+Fitting the infection model to recovery
+time series slightly overestimates the basic reproduction number but gives 
+good coverage. 
+We expect fitting incorrect models to give more biased estimates when $\mathcal R_0$ is higher because the differences in the size of observed epidemic peaks become greater.
+Fitting the correct model gives unbiased estimates and good coverage.
+
+\begin{figure}
+\DIFdelbeginFL %DIFDELCMD < \includegraphics[width=\textwidth]{../figure/compare_deterministic.pdf}
+%DIFDELCMD < %%%
+\DIFdelendFL \DIFaddbeginFL \includegraphics[width=\textwidth]{compare_deterministic.pdf}
+\DIFaddendFL \caption{
+\textbf{A comparison of incidence measured at two different time points in infection.}
+We simulate infection time series and recovery time series 100 times using the 
+following parameters:  
+$\mathcal R_0 = 2$, $1/\gamma = 1$ time units, $N = 1 \times 10^5$, \DIFdelbeginFL \DIFdelFL{$i0 = 1 \times 10^{-4}$}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{$i_0 = 1 \times 10^{-4}$}\DIFaddendFL ,
+$\rho = 0.5$, $\theta = 10$, and $\Delta t = 0.1$ time units.
+For each simulation, we fit the infection model and the recovery model by
+(A) estimating the mean infectious period and (B) assuming
+that the mean infectious period is known.
+Coverage probabilities represent the proportion of confidence intervals
+that contain the true value of the basic reproductive number ($\mathcal R_0$).
+}
+\end{figure}
+
+Disease modelers often assume that the mean infectious period of a disease
+is known and focus on estimating the basic reproduction number (e.g.,
+\cite{hooker2010parameterizing, lin2016seasonality, pons2018serotype}). 
+When we assume that the true value of the mean infectious period is known
+and try to estimate the remaining 4 parameters of the SIR model (Figure 2B), fitting
+incorrect models results in a clearer bias (in opposite directions)
+and a much lower coverage (cf. \cite{elderd2006uncertainty}).
+
+Differences in the direction of the bias can be explained by the estimates of the
+exponential growth rate ($r = \beta - \gamma$) and the mean infectious period ($1/\gamma$).
+In general, we expect delays in observation processes to make the observed epidemic 
+time series last longer and have smaller peaks (Figure 1).
+When we fit the recovery model to an infection time series, the model overestimates
+the initial growth rate in order to match the bigger (and faster) epidemic peak of the 
+infection time series. When the mean infectious period is fixed, higher growth rate
+translates to higher basic reproduction number, as Figure 2B shows. When we allow
+the mean infectious period to vary, the model still overestimates the growth rate but
+also underestimates the mean infectious period (high $\gamma$), 
+which decreases the overall estimate of the basic reproduction number.
+Similarly, fitting the infection model to a recovery time series underestimates
+the growth rate to match the smaller (and slower) epidemic peak; this 
+underestimates the basic reproduction number when the mean infectious period is fixed. 
+When we allow the mean infectious period to vary, we overestimate the mean infectious
+period, which in turn increases the estimate of the basic reproduction number.
+
+\section{Discussion}
+
+Mathematical modeling of infectious disease outbreaks helps us understand how disease spreads in a population; 
+however, epidemic models often make simple assumptions about how cases are reported. 
+We used a deterministic SIR model to show that delays in case reports affect the observed shape of an epidemic curve and the estimates of the basic reproduction number.
+Even when the basic reproduction number is small (e.g., $\mathcal R_0 = 2$), fitting incorrect models can introduce small bias and give narrow confidence intervals.
+
+We compared two scenarios in which newly infected cases are reported 
+instantaneously (1) when individuals become infected or
+(2) when they recover. Although neither of these
+assumptions is realistic, many epidemic models still rely on these
+assumptions (see Introduction). 
+More realistic models may distinguish reported and unreported
+(i.e., identified and unidentified) cases by adding
+new state variables \citep{browne2015modeling,webb2015model} 
+or by modeling an explicit delay distribution in reporting time 
+\citep{harris1990reporting, ferguson2001foot, goldstein2009reconstructing,
+ster2009epidemiological, birrell2011bayesian, funk2018real}.
+
+We considered observation processes associated with incidence 
+reporting; however, we expect observation processes to be just as 
+(if not more) important in analyzing mortality data. Many disease modelers have
+tried to infer underlying transmission mechanisms from historical mortality 
+data but assumed that individual deaths are recorded as soon as individuals die 
+\citep{he2013inferring, didelot2017model, dean2018human}; this includes the classic work by
+\cite{kermack1927contribution} who approximated the reported \emph{number} of
+deaths per week from plague with instantaneous death \emph{rates} ($dR/dt$).
+These frameworks do not account for the possibility 
+that a delay in reporting of deaths can
+change the shape of an epidemic curve -- delays in case reports can decrease
+the size of the observed epidemic peak and delay the observed timing of the peak (Figure 1). 
+
+\DIFaddbegin \DIFadd{Distributions of reporting time delays implicitly depend on the latent and infectious 
+period distributions. For example, when cases are reported
+at the end of infectious periods \mbox{%DIFAUXCMD
+\citep{breto2009time, he2009plug, lin2016seasonality}}\hspace{0pt}%DIFAUXCMD
+,
+the delay distribution is equivalent to the convolution of the latent and
+infectious period distributions. These distributions also play important roles in 
+shaping the epidemiological dynamics,
+including the probability and size of an outbreak
+\mbox{%DIFAUXCMD
+\citep{anderson1980spread}}\hspace{0pt}%DIFAUXCMD
+, the stability and persistence of a system
+\mbox{%DIFAUXCMD
+\citep{keeling1998effect, lloyd2001destabilization, lloyd2001realistic}}\hspace{0pt}%DIFAUXCMD
+,
+and the  occurrence of dynamical transitions \mbox{%DIFAUXCMD
+\citep{krylova2013effects}}\hspace{0pt}%DIFAUXCMD
+.
+Assumptions about latent and infectious period distributions can also have large effects on the estimates of the basic reproductive number \mbox{%DIFAUXCMD
+\citep{wearing2005appropriate}}\hspace{0pt}%DIFAUXCMD
+.
+}
+
+\DIFaddend Here, we assumed that the underlying transmission process is deterministic; this 
+assumes that all error can be explained by observation errors alone. 
+We chose to study a deterministic model SIR for computational efficiency; 
+we do not recommend using deterministic models for real outbreak analyses.
+Ignoring process errors (i.e., stochasticity in the transmission process) can lead to
+overly confident results \citep{king2015avoidable}. Using stochastic models may
+give better coverage probabilities even when wrong observation models are used.
+Nonetheless, misspecifying the observation model may still affect conclusions from 
+stochastic models and introduce bias.
+
+\DIFaddbegin \DIFadd{All statistical models rely on simplifying assumptions.
+Given a range of possible assumptions, modelers have to
+decide which aspects of a system to capture 
+at the cost of simplifying other aspects.
+However, some assumptions are often taken for granted.
+Epidemic modelers tend to focus on assumptions about the
+transmission process; processes through which cases are reported are often 
+overlooked and simplified.
+}\DIFaddend Our study shows that a seemingly negligible change in the assumptions of an epidemic
+model can affect the inference of 
+infectious disease transmission.
+\DIFdelbegin \DIFdel{While }\DIFdelend \DIFaddbegin \DIFadd{Although }\DIFaddend the amount of bias introduced from the misspecification of the observation
+model can be \DIFdelbegin \DIFdel{fairly }\DIFdelend small (e.g., less than 5\% in our examples), \DIFdelbegin \DIFdel{any }\DIFdelend modelers
+trying to make serious \DIFdelbegin \DIFdel{forecasts should be aware of }\DIFdelend \DIFaddbegin \DIFadd{predictions may want to control for }\DIFaddend potential biases.
+We caution disease modelers to \DIFdelbegin \DIFdel{carefully consider the implications of their model assumptions when developing epidemic models}\DIFdelend \DIFaddbegin \DIFadd{be more careful about their modeling decisions as they may have unexpected consequences on the inference}\DIFaddend .
+
+\section*{Acknowledgements}
+
+We thank David Earn for providing helpful comments on the manuscript. BMB is supported by an NSERC Discovery grant.
+
+\bibliography{observation}
+\end{document}
