@@ -76,17 +76,26 @@ g2 <- ggplot(filter(coverdata, inf=="estimated")) +
 	scale_colour_discrete("Fitted timing") +
   scale_shape_discrete("Fitted timing") +
 	theme(
-		legend.position=c(0.76, 0.2)
+		legend.position="top"
 	)
+
+g_legend<-function(a.gplot){
+  tmp <- ggplot_gtable(ggplot_build(a.gplot))
+  leg <- which(sapply(tmp$grobs, function(x) x$name) == "guide-box")
+  legend <- tmp$grobs[[leg]]
+  return(legend)
+}
+
+mylegend <- g_legend(g2)
 
 g3 <- g1 %+% filter(summdata, inf=="fixed")
 	
 g4 <- g2 %+% filter(coverdata, inf=="fixed") +
 	theme(legend.position="none")
 
-g5 <- grid.arrange(g1, g2, nrow=1, top=textGrob("A) Estimated infectious period", hjust=1.7))
+g5 <- grid.arrange(g1, g2 + theme(legend.position = "none"), nrow=1, top=textGrob("A) Estimated infectious period", hjust=1.7))
 g6 <- grid.arrange(g3, g4, nrow=1, top=textGrob("B) Fixed infectious period", hjust=2))
 
-gtot <- arrangeGrob(g5, g6, nrow=2)
+gtot <- arrangeGrob(mylegend, arrangeGrob(g5, g6, nrow=2), nrow = 2, heights=c(1, 10))
 
 ggsave("compare_deterministic.pdf", gtot, width=8, height=6)
