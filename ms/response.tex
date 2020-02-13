@@ -41,7 +41,9 @@ Below please find our responses to reviewers.
 
 \revtext{Having said this, I would like to point out that I am sure there are a number of papers out there that have look at similar questions in the context of different infectious diseases, etc. It'd be good to make sure the relevant literature is considered and appropriately cited.}
 
-We agree that this is an important point. Although our study considers the effect of making incorrect assumptions about the reporting time distributions, these assumptions implicitly depend on latent and infectious period distributions. We have added the following paragraph in the Discussion to address this point:
+The reviewer may have misconstrued our goals in this paper. We were \emph{not} exploring the effects of the process delay distributions (i.e. latent and infectious periods), and their mis-specification, on epidemiological dynamics and parameter estimation. Rather, we were exploring the effects of reporting delays (and their mis-specification) on parameter estimation.
+
+However, reporting delays do depend implicitly on the process delays. We have added the following paragraph in the Discussion to address this point:
 
 ``Delay distributions in reporting time implicitly depend on latent and infectious 
 period distributions. For example, when cases are assumed to be reported
@@ -54,6 +56,7 @@ prediction of dynamical transitions. Assumptions about
 latent and infectious period distributions can also have large effects on the
 estimates of the basic reproductive number.''
 
+Although we could extend the paper to consider dynamics (and reporting time delays) based on more realistic distributions, our goal here was to evaluate the effects of these assumptions qualitatively, in the simplest possible epidemiological model.
 
 \rev{Reviewer 2}
 
@@ -64,7 +67,7 @@ estimates of the basic reproductive number.''
 \revtext{I have one comment that the authors may wish to consider, although this doesn't rise to the level of a critical flaw that must be corrected.  It seemed to me that the Discussion lost sight of the fact that statistical models often have to make simplifying assumptions.  Despite these simulation results, it seems to me that making a simplifying assumption about the process generating the incidence data may not be a terrible thing to do with real data.  When it comes to fitting statistical models to noisy data, models that are "more realistic", in the sense of incorporating more of the underlying mechanism, do not necessarily lead to improved inference.  One has to choose their battles with respect to what one tries to capture in a model, and what one simplifies away.  With real data, it is entirely unclear whether model fit would be improved by fitting a model with a more complicated description of the process generating the incidence data, and it may very well be that such a
 question can only be answered on a case-by-case basis.  In the absence of such understanding, it seems to me that the Discussion could strike a somewhat more measured tone regarding the merits of simpler vs. more complicated models.}
 
-We agree. We did not intend to say that modelers should always thrive to build the more complex models. We have revised the final paragraph of the Discussion to better reflect our intention as well the reviewer's comment:
+We agree. We did not intend to say that modelers should always strive to build the more complex models. We have revised the final paragraph of the Discussion to better reflect our intentions:
 
 ``All statistical models must rely on simplifying assumptions.
 Given a range of choices of assumptions one can make, modelers have to

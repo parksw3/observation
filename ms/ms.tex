@@ -159,12 +159,12 @@ size $N$ is assumed to be known.
 \textbf{A comparison of incidence measured at two different time points in infection.}
 (A) 
 A deterministic simulation of the SIR model using the following parameters: 
-$\mathcal R_0 = 2$, $1/\gamma = 1$ time units, $N = 1 \times 10^5$, $i0 = 1 \times 10^{-4}$,
+$\mathcal R_0 = 2$, $1/\gamma = 1$ time units, $N = 1 \times 10^5$, $i_0 = 1 \times 10^{-4}$,
 and $\Delta t = 0.1$ time units.
 (B-C) Effects of $\mathcal R_0$ on the relative difference in the size of the epidemic peak ($1 - [\max i_2(t)]/[\max i_1(t)]$) and the difference in the peak timing ($\hat{t}_2 - \hat{t}_1$ where $i_k(\hat{t}_k) = \max i_k(t)$ for $k = 1, 2$) due to delays in reporting time.
 Open circles: simulation results of the deterministic SIR model.
 Solid lines: locally estimated scatterplot smoothing (LOESS) curves fitted to simulation results.
-Remaining parameters are held constant ($1/\gamma = 1$ time units, $N = 1 \times 10^5$, $i0 = 1 \times 10^{-4}$, and $\Delta t = 0.1$ time units) throughout simulations.
+Remaining parameters are held constant ($1/\gamma = 1$ time units, $N = 1 \times 10^5$, $i_0 = 1 \times 10^{-4}$, and $\Delta t = 0.1$ time units) throughout simulations.
 }
 \end{figure}
 
@@ -208,7 +208,7 @@ Fitting the correct model gives unbiased estimates and good coverage.
 \textbf{A comparison of incidence measured at two different time points in infection.}
 We simulate infection time series and recovery time series 100 times using the 
 following parameters:  
-$\mathcal R_0 = 2$, $1/\gamma = 1$ time units, $N = 1 \times 10^5$, $i0 = 1 \times 10^{-4}$,
+$\mathcal R_0 = 2$, $1/\gamma = 1$ time units, $N = 1 \times 10^5$, $i_0 = 1 \times 10^{-4}$,
 $\rho = 0.5$, $\theta = 10$, and $\Delta t = 0.1$ time units.
 For each simulation, we fit the infection model and the recovery model by
 (A) estimating the mean infectious period and (B) assuming
@@ -275,17 +275,17 @@ that a delay in reporting of deaths can
 change the shape of an epidemic curve -- delays in case reports can decrease
 the size of the observed epidemic peak and delay the observed timing of the peak (Figure 1). 
 
-Delay distributions in reporting time implicitly depend on latent and infectious 
-period distributions. For example, when cases are assumed to be reported
+Distributions of reporting time delays implicitly depend on the latent and infectious 
+period distributions. For example, when cases are reported
 at the end of infectious periods \citep{breto2009time, he2009plug, lin2016seasonality},
 the delay distribution is equivalent to the convolution of the latent and
-infectious period distributions. These distributions play important roles in 
-shaping the epidemiological dynamics, including the probability and size of an outbreak
+infectious period distributions. These distributions also play important roles in 
+shaping the epidemiological dynamics,
+including the probability and size of an outbreak
 \citep{anderson1980spread}, the stability and persistence of a system
-\citep{keeling1998effect, lloyd2001destabilization, lloyd2001realistic}, and the 
-prediction of dynamical transitions \citep{krylova2013effects}. Assumptions about
-latent and infectious period distributions can also have large effects on the
-estimates of the basic reproductive number \citep{wearing2005appropriate}.
+\citep{keeling1998effect, lloyd2001destabilization, lloyd2001realistic},
+and the  occurrence of dynamical transitions \citep{krylova2013effects}.
+Assumptions about latent and infectious period distributions can also have large effects on the estimates of the basic reproductive number \citep{wearing2005appropriate}.
 
 Here, we assumed that the underlying transmission process is deterministic; this 
 assumes that all error can be explained by observation errors alone. 
@@ -297,13 +297,13 @@ give better coverage probabilities even when wrong observation models are used.
 Nonetheless, misspecifying the observation model may still affect conclusions from 
 stochastic models and introduce bias.
 
-All statistical models must rely on simplifying assumptions.
-Given a range of choices of assumptions one can make, modelers have to
-decide which aspect of a system they wish to capture 
+All statistical models rely on simplifying assumptions.
+Given a range of possible assumptions, modelers have to
+decide which aspects of a system to capture 
 at the cost of simplifying other aspects.
-However, some assumptions are often more carefully tested than others.
-In the case of epidemic models, assumptions about the process of transmission tend to be
-the most important ones; processes through which cases are reported are often 
+However, some assumptions are often taken for granted.
+Epidemic modelers tend to focus on assumptions about the
+transmission process; processes through which cases are reported are often 
 overlooked and simplified.
 Our study shows that a seemingly negligible change in the assumptions of an epidemic
 model can affect the inference of 
