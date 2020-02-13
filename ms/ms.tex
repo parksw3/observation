@@ -154,7 +154,7 @@ size $N$ is assumed to be known.
 \section{Results}
 
 \begin{figure}[!t]
-\includegraphics[width=\textwidth]{../figure/example.pdf}
+\includegraphics[width=\textwidth]{example.pdf}
 \caption{
 \textbf{A comparison of incidence measured at two different time points in infection.}
 (A) 
@@ -203,7 +203,7 @@ We expect fitting incorrect models to give more biased estimates when $\mathcal 
 Fitting the correct model gives unbiased estimates and good coverage.
 
 \begin{figure}
-\includegraphics[width=\textwidth]{../figure/compare_deterministic.pdf}
+\includegraphics[width=\textwidth]{compare_deterministic.pdf}
 \caption{
 \textbf{A comparison of incidence measured at two different time points in infection.}
 We simulate infection time series and recovery time series 100 times using the 
@@ -275,6 +275,18 @@ that a delay in reporting of deaths can
 change the shape of an epidemic curve -- delays in case reports can decrease
 the size of the observed epidemic peak and delay the observed timing of the peak (Figure 1). 
 
+Delay distributions in reporting time implicitly depend on latent and infectious 
+period distributions. For example, when cases are assumed to be reported
+at the end of infectious periods \citep{breto2009time, he2009plug, lin2016seasonality},
+the delay distribution is equivalent to the convolution of the latent and
+infectious period distributions. These distributions play important roles in 
+shaping the epidemiological dynamics, including the probability and size of an outbreak
+\citep{anderson1980spread}, the stability and persistence of a system
+\citep{keeling1998effect, lloyd2001destabilization, lloyd2001realistic}, and the 
+prediction of dynamical transitions \citep{krylova2013effects}. Assumptions about
+latent and infectious period distributions can also have large effects on the
+estimates of the basic reproductive number \citep{wearing2005appropriate}.
+
 Here, we assumed that the underlying transmission process is deterministic; this 
 assumes that all error can be explained by observation errors alone. 
 We chose to study a deterministic model SIR for computational efficiency; 
@@ -285,12 +297,21 @@ give better coverage probabilities even when wrong observation models are used.
 Nonetheless, misspecifying the observation model may still affect conclusions from 
 stochastic models and introduce bias.
 
+All statistical models must rely on simplifying assumptions.
+Given a range of choices of assumptions one can make, modelers have to
+decide which aspect of a system they wish to capture 
+at the cost of simplifying other aspects.
+However, some assumptions are often more carefully tested than others.
+In the case of epidemic models, assumptions about the process of transmission tend to be
+the most important ones; processes through which cases are reported are often 
+overlooked and simplified.
 Our study shows that a seemingly negligible change in the assumptions of an epidemic
-model can affect the inference of infectious disease transmission.
-While the amount of bias introduced from the misspecification of the observation
-model can be fairly small (e.g., less than 5\% in our examples), any modelers
-trying to make serious forecasts should be aware of potential biases.
-We caution disease modelers to carefully consider the implications of their model assumptions when developing epidemic models.
+model can affect the inference of 
+infectious disease transmission.
+Although the amount of bias introduced from the misspecification of the observation
+model can be small (e.g., less than 5\% in our examples), modelers
+trying to make serious predictions may want to control for potential biases.
+We caution disease modelers to be more careful about modeling decisions as they may have unexpected consequences on the inference.
 
 \section*{Acknowledgements}
 
